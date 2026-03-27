@@ -210,6 +210,15 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 
 ---
 
+## Important Notes
+
+- **Hook field names may vary by Kiro version** — This repo uses `toolTypes`, `runCommand`, and `fileEdited` which match Kiro's internal hook creation system. Some Kiro documentation shows `tools`, `shellCommand`, and `fileSaved`. Verify by creating a hook in your Kiro IDE and inspecting the generated JSON.
+- **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
+- **Post Tool Use hooks are advisory, not blocking** — The Security Self-Heal Check hook suggests fixes but cannot block the write operation. Only Pre Tool Use hooks can block.
+- **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers. The npm package `@modelcontextprotocol/server-github` is the standard MCP GitHub server. Kiro's MCP server directory may show alternative URL-based configs.
+
+---
+
 ## References
 
 - [Kiro Official Documentation](https://kiro.dev/docs/)

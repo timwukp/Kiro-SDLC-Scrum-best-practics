@@ -339,6 +339,7 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 
 ## Important Notes
 
+- **Hook field names may vary by Kiro version** — This repo uses `toolTypes`, `runCommand`, and `fileEdited` which match Kiro's internal hook creation system. Some Kiro documentation shows `tools`, `shellCommand`, and `fileSaved`. Verify by creating a hook in your Kiro IDE and inspecting the generated JSON.
 - **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
 - **Specs are NOT accessible inside subagents** — Confirmed Kiro limitation.
 - **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers in `mcp.json`.
