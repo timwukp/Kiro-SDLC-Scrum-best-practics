@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Coding Standard Guard",
+  "description": "Block writes that violate naming conventions or are missing license headers. Enforces Java and SQL naming standards.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/check-conventions.sh"
+  }
+}

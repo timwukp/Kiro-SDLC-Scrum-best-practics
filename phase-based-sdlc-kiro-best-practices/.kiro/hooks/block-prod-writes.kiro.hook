@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Block Prod Writes",
+  "description": "Block write operations targeting production-protected paths. Enforces CAB approval workflow for all production changes.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/check-prod-path.sh"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Sprint Status Sync",
+  "description": "Check for incomplete work markers and uncommitted changes after agent finishes its turn.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/sync-sprint-status.sh"
+  }
+}

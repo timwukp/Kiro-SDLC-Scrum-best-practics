@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "DB Write Guard",
+  "description": "Block dangerous SQL mutations. Database changes must go through Flyway migrations only.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["shell", "@aurora-dsql"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/validate-sql-readonly.sh"
+  }
+}

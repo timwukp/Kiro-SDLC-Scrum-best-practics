@@ -1,0 +1,12 @@
+{
+  "protectedPaths": [
+    "config/prod/**",
+    "infra/lib/*Prod*",
+    "src/main/resources/application-prod.yml",
+    ".github/workflows/deploy-prod.yml",
+    ".github/workflows/release-*.yml"
+  ],
+  "reason": "Production paths require CAB approval. Use /prod-change-request skill.",
+  "approvalRequired": "CAB (Change Advisory Board)",
+  "lastUpdated": "2025-07-15"
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Post-Batch Status Sync",
+  "description": "Sync completed issue statuses and check for incomplete work markers after agent finishes its turn.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/sync-issue-status.sh"
+  }
+}

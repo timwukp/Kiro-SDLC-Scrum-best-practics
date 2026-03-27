@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "autoApprove": ["list_issues", "get_issue", "search_issues", "list_pull_requests", "get_pull_request"],
+      "disabledTools": ["delete_repository"],
+      "disabled": false
+    },
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-atlassian"],
+      "env": {
+        "ATLASSIAN_API_TOKEN": "${JIRA_API_TOKEN}",
+        "ATLASSIAN_EMAIL": "${JIRA_EMAIL}",
+        "ATLASSIAN_DOMAIN": "${JIRA_DOMAIN}"
+      },
+      "autoApprove": ["search_issues", "get_issue", "list_sprints"],
+      "disabled": false
+    },
+    "confluence": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-atlassian"],
+      "env": {
+        "ATLASSIAN_API_TOKEN": "${CONFLUENCE_API_TOKEN}",
+        "ATLASSIAN_EMAIL": "${CONFLUENCE_EMAIL}",
+        "ATLASSIAN_DOMAIN": "${CONFLUENCE_DOMAIN}"
+      },
+      "autoApprove": ["search_pages", "get_page"],
+      "disabled": true
+    }
+  }
+}

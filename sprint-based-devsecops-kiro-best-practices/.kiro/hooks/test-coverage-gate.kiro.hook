@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Test Coverage Gate",
+  "description": "Run test coverage and security regression check after spec task completion.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/check-test-coverage.sh"
+  }
+}

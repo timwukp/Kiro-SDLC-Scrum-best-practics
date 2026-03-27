@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Full Security Audit",
+  "description": "On-demand security audit across the codebase. Spawns security-scanner subagent for comprehensive OWASP and dependency scanning.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Perform a comprehensive security audit of the codebase using the security-scanner subagent. Check for OWASP Top 10 vulnerabilities, hardcoded credentials, dependency CVEs, and PCI-DSS compliance. Produce a consolidated findings report with severity levels."
+  }
+}

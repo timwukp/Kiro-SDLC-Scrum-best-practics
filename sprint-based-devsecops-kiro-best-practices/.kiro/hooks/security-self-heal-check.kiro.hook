@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Security Self-Heal Check",
+  "description": "After writing source code, AI proactively scans for OWASP vulnerabilities and suggests self-healing fixes. Acts as a Digital Teammate catching issues before peer review.",
+  "version": "1",
+  "when": {
+    "type": "postToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A source file was just written or modified. Act as a security self-healing agent: 1) Scan the change for OWASP Top 10 risks (injection, XSS, broken auth, sensitive data exposure). 2) If the file handles user input, money, or PII, perform extra scrutiny. 3) If a vulnerability is found, provide the FIXED code and a security regression test. 4) If clean, confirm with a brief 'Security check: PASS' message."
+  }
+}

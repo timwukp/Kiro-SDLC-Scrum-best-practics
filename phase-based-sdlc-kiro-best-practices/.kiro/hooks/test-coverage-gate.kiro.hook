@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Test Coverage Gate",
+  "description": "Run test coverage check after spec task completion. Warns if coverage drops below 80% threshold.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/check-test-coverage.sh"
+  }
+}

@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Banking Platform API
+  version: 1.0.0
+  description: Core Banking API for account management and transactions
+  contact:
+    name: Platform Engineering
+    email: platform@bank.example.com
+
+servers:
+  - url: https://api.bank.example.com/api/v1
+    description: Production
+
+security:
+  - bearerAuth: []
+
+paths:
+  /accounts:
+    get:
+      summary: List customer accounts
+      operationId: listAccounts
+      tags: [Accounts]
+      security:
+        - bearerAuth: [read:accounts]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 0, minimum: 0 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 20, minimum: 1, maximum: 100 }
+      responses:
+        '200':
+          description: List of accounts
+        '401':
+          description: Authentication required
+        '429':
+          description: Rate limited
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

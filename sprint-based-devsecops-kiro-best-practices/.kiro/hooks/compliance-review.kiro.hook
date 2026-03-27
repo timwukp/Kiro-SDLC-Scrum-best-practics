@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Compliance Review Trigger",
+  "description": "Trigger compliance review when source files are saved. Reviews against MAS TRM, PCI-DSS, and PDPA.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["src/**/*.java", "src/**/*.ts", "src/**/*.tsx"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the saved file against active compliance steering (MAS TRM, PCI-DSS, PDPA). Flag any violations with severity and regulation reference."
+  }
+}

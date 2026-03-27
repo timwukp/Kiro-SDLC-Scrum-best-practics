@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Full Security Audit",
+  "description": "On-demand comprehensive security audit. Spawns security-scanner for OWASP, CVE, and PCI-DSS scanning.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Perform a comprehensive security audit using the security-scanner subagent. Check OWASP Top 10, hardcoded credentials, dependency CVEs, container vulnerabilities, and PCI-DSS compliance. Produce a consolidated findings report with severity levels and remediation recommendations."
+  }
+}
