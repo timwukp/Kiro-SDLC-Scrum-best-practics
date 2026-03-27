@@ -189,7 +189,7 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 | Credential Guard | Pre Tool Use (write) | Shell | Free | Yes |
 | DB Write Guard | Pre Tool Use (shell, @aurora-dsql) | Shell | Free | Yes |
 | Security Self-Heal Check | Post Tool Use (write) | Agent Prompt | Credits | No |
-| Compliance Review | File Edited (src/**) | Agent Prompt | Credits | No |
+| Compliance Review | File Save (src/**) | Agent Prompt | Credits | No |
 | Security Audit | Manual Trigger | Agent Prompt | Credits | No |
 | Test Coverage Gate | Post Task Execution | Shell | Free | No |
 | Sprint Status Sync | Agent Stop | Shell | Free | No |
@@ -202,7 +202,7 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 2. **Security is shift-left** — automated scanning on every commit, not just before release
 3. **Self-healing development** — AI detects vulnerabilities and provides corrected code before peer review
 4. **Autonomous deployment** — AI monitors canary releases and rolls back on security anomaly
-5. **Steering instructs; Hooks enforce** — Pre Tool Use Shell hooks provide 100% deterministic enforcement
+5. **Steering instructs; Hooks enforce** — Pre Tool Use and Prompt Submit Shell hooks provide 100% deterministic enforcement
 6. **Hooks fire in main agent only** — critical enforcement flows through the main agent
 7. **Steering + MCP propagate to subagents** — security context inherited automatically
 8. **Shell Command = free; Agent Prompt = credits** — use Shell for deterministic checks
@@ -212,9 +212,9 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 
 ## Important Notes
 
-- **Hook field names may vary by Kiro version** — This repo uses `toolTypes`, `runCommand`, and `fileEdited` which match Kiro's internal hook creation system. Some Kiro documentation shows `tools`, `shellCommand`, and `fileSaved`. Verify by creating a hook in your Kiro IDE and inspecting the generated JSON.
+- **Hook trigger type names** — This repo uses `fileSaved` which matches the official Kiro docs (kiro.dev/docs/hooks/types). The official trigger types are: Prompt Submit, Agent Stop, Pre Tool Use, Post Tool Use, File Create, File Save, File Delete, Pre Task Execution, Post Task Execution, Manual Trigger.
 - **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
-- **Post Tool Use hooks are advisory, not blocking** — The Security Self-Heal Check hook suggests fixes but cannot block the write operation. Only Pre Tool Use hooks can block.
+- **Post Tool Use hooks are advisory, not blocking** — The Security Self-Heal Check hook suggests fixes but cannot block the write operation. Only Pre Tool Use and Prompt Submit hooks can block.
 - **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers. The npm package `@modelcontextprotocol/server-github` is the standard MCP GitHub server. Kiro's MCP server directory may show alternative URL-based configs.
 
 ---
