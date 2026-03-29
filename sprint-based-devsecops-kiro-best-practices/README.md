@@ -36,60 +36,29 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) and the [2
 - **Compliance:** MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA
 - **Pipeline:** GitHub Actions + SonarQube + Snyk + OWASP ZAP
 
-### Abbreviations
-
-| Term | Meaning |
-|------|---------|
-| PO | Product Owner (Scrum accountability) |
-| SM | Scrum Master (Scrum accountability) |
-| BA | Business Analyst |
-| SRE | Site Reliability Engineer |
-| DBA | Database Administrator |
-| CISO | Chief Information Security Officer |
-| CAB | Change Advisory Board |
-| SDLC | Software Development Life Cycle |
-| ADR | Architecture Decision Record |
-| IaC | Infrastructure as Code |
-| CDK | AWS Cloud Development Kit |
-| SAST | Static Application Security Testing |
-| DAST | Dynamic Application Security Testing |
-| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
-| IDOR | Insecure Direct Object Reference |
-| OWASP | Open Worldwide Application Security Project |
-| CVE | Common Vulnerabilities and Exposures |
-| CWE | Common Weakness Enumeration |
-| MFA | Multi-Factor Authentication |
-| JWT | JSON Web Token |
-| mTLS | Mutual Transport Layer Security |
-| RBAC | Role-Based Access Control |
-| DDD | Domain-Driven Design |
-| DR | Disaster Recovery |
-| RTO | Recovery Time Objective |
-| RPO | Recovery Point Objective |
-| SLO | Service Level Objective |
-| SLI | Service Level Indicator |
-| DORA | DevOps Research and Assessment (metrics) |
-| MTTR | Mean Time to Recovery |
-| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
-| PCI-DSS | Payment Card Industry Data Security Standard |
-| PDPA | Personal Data Protection Act (Singapore) |
-| SOX | Sarbanes-Oxley Act |
-
 ---
+
+## Prerequisites
+
+- [Kiro IDE](https://kiro.dev) installed
+- Git
+- Node.js 18+ (for `npx` — used by MCP servers)
 
 ## Quick Start (5 Minutes)
 
-### Step 1: Copy `.kiro/` into your project
+### Option A: Apply to your existing project
+
 ```bash
 git clone https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics.git
 cp -r sprint-based-devsecops-kiro-best-practices/.kiro /path/to/your-project/
 cp sprint-based-devsecops-kiro-best-practices/AGENTS.md /path/to/your-project/
 cp -r sprint-based-devsecops-kiro-best-practices/docs /path/to/your-project/
+cp -r sprint-based-devsecops-kiro-best-practices/config /path/to/your-project/
 ```
 
 ### Step 2: Make hook scripts executable
 ```bash
-chmod +x .kiro/hooks/scripts/*.sh
+chmod +x /path/to/your-project/.kiro/hooks/scripts/*.sh
 ```
 
 ### Step 3: Configure environment variables
@@ -107,6 +76,16 @@ Add to Kiro IDE settings → "Mcp Approved Env Vars":
 | **AWS CDK/CloudFormation** | Infrastructure as Code | DevOps Engineer |
 | **Figma** | UI/UX design specs | UX/UI Designer |
 | **Checkmarx** | Additional SAST (optional) | Security Engineer |
+
+### Option B: Explore standalone (no existing project needed)
+
+```bash
+git clone https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics.git
+cd Kiro-SDLC-Scrum-best-practics/sprint-based-devsecops-kiro-best-practices
+chmod +x .kiro/hooks/scripts/*.sh
+# Open this folder in Kiro IDE
+# Try: "/threat-modeling" or "/chaos-security-testing" in chat
+```
 
 ---
 
@@ -257,6 +236,60 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 - **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
 - **Post Tool Use hooks are advisory, not blocking** — The Security Self-Heal Check hook suggests fixes but cannot block the write operation. Only Pre Tool Use and Prompt Submit hooks can block.
 - **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers. The npm package `@modelcontextprotocol/server-github` is the standard MCP GitHub server. Kiro's MCP server directory may show alternative URL-based configs.
+
+---
+
+## Customization Guide
+
+### Adapting for Your Organization
+
+1. **Update `product.md`** — Replace business domain, stakeholders, and Definition of Done
+2. **Update `tech.md`** — Adjust tech stack versions and tools
+3. **Update `structure.md`** — Map to your actual repository layout and service owners
+4. **Update `security-policy.md`** — Add your specific protected paths and credential policies
+5. **Update `compliance-mas-trm.md`** — Replace with your jurisdiction's regulations (APRA for Australia, FSA for Japan, etc.)
+6. **Update `scrum-devsecops.md`** — Adjust Sprint cadence, events, and security integration points
+7. **Update `mcp.json`** — Configure your actual GitHub org, Jira project, and Snyk token
+
+---
+
+## Abbreviations
+
+| Term | Meaning |
+|------|---------|
+| PO | Product Owner (Scrum accountability) |
+| SM | Scrum Master (Scrum accountability) |
+| BA | Business Analyst |
+| QA | Quality Assurance |
+| SRE | Site Reliability Engineer |
+| DBA | Database Administrator |
+| CISO | Chief Information Security Officer |
+| CAB | Change Advisory Board |
+| SDLC | Software Development Life Cycle |
+| ADR | Architecture Decision Record |
+| IaC | Infrastructure as Code |
+| CDK | AWS Cloud Development Kit |
+| SAST | Static Application Security Testing |
+| DAST | Dynamic Application Security Testing |
+| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
+| IDOR | Insecure Direct Object Reference |
+| OWASP | Open Worldwide Application Security Project |
+| CVE | Common Vulnerabilities and Exposures |
+| CWE | Common Weakness Enumeration |
+| MFA | Multi-Factor Authentication |
+| JWT | JSON Web Token |
+| mTLS | Mutual Transport Layer Security |
+| RBAC | Role-Based Access Control |
+| DDD | Domain-Driven Design |
+| DR | Disaster Recovery |
+| RTO / RPO | Recovery Time Objective / Recovery Point Objective |
+| SLO / SLI | Service Level Objective / Service Level Indicator |
+| DORA | DevOps Research and Assessment (metrics) |
+| MTTR | Mean Time to Recovery |
+| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
+| PCI-DSS | Payment Card Industry Data Security Standard |
+| PDPA | Personal Data Protection Act (Singapore) |
+| SOX | Sarbanes-Oxley Act |
 
 ---
 

@@ -13,44 +13,17 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) — verifi
 - **Tech Stack:** Java 21, Spring Boot 3.x, React 18 + TypeScript, Aurora PostgreSQL, AWS
 - **Compliance:** MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA
 
-### Abbreviations
-
-| Term | Meaning |
-|------|---------|
-| BA | Business Analyst |
-| PO | Product Owner |
-| QA | Quality Assurance |
-| SRE | Site Reliability Engineer |
-| DBA | Database Administrator |
-| CISO | Chief Information Security Officer |
-| CAB | Change Advisory Board |
-| SDLC | Software Development Life Cycle |
-| ADR | Architecture Decision Record |
-| IaC | Infrastructure as Code |
-| CDK | AWS Cloud Development Kit |
-| SAST | Static Application Security Testing |
-| DAST | Dynamic Application Security Testing |
-| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
-| OWASP | Open Worldwide Application Security Project |
-| CVE | Common Vulnerabilities and Exposures |
-| MFA | Multi-Factor Authentication |
-| JWT | JSON Web Token |
-| RBAC | Role-Based Access Control |
-| DDD | Domain-Driven Design |
-| DR | Disaster Recovery |
-| RTO | Recovery Time Objective |
-| RPO | Recovery Point Objective |
-| SLO | Service Level Objective |
-| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
-| PCI-DSS | Payment Card Industry Data Security Standard |
-| PDPA | Personal Data Protection Act (Singapore) |
-| SOX | Sarbanes-Oxley Act |
-
 ---
+
+## Prerequisites
+
+- [Kiro IDE](https://kiro.dev) installed
+- Git
+- Node.js 18+ (for `npx` — used by MCP servers)
 
 ## Quick Start (5 Minutes)
 
-### Step 1: Copy `.kiro/` into your project
+### Option A: Apply to your existing project
 
 ```bash
 # Clone this repo
@@ -100,6 +73,16 @@ Open Kiro IDE → Powers panel → Install these official Powers:
 
 Open your banking project folder in Kiro IDE. The steering files load automatically based on their inclusion modes. You're ready to go.
 
+### Option B: Explore standalone (no existing project needed)
+
+```bash
+git clone https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics.git
+cd Kiro-SDLC-Scrum-best-practics/phase-based-sdlc-kiro-best-practices
+chmod +x .kiro/hooks/scripts/*.sh
+# Open this folder in Kiro IDE
+# Try: "/architecture-review" or "/security-audit" in chat
+```
+
 ---
 
 ## What's Included
@@ -127,19 +110,19 @@ config/                ← Protected paths configuration
 #### Business Analyst
 - **Steering loaded:** `product.md` (always), `backlog-standards.md` (auto — activates when discussing stories)
 - **Skill:** Type `/requirements-gathering` in chat to get the user story template and banking-specific guidance
-- **Subagent:** Ask Kiro to validate requirements — it spawns `requirements-validator` to check completeness, consistency, and regulatory compliance
+- **Subagent:** Ask Kiro to validate requirements — invoke `requirements-validator` to check completeness, consistency, and regulatory compliance
 - **Example prompt:** "Validate the user stories in docs/requirements/sprint-42.md against MAS TRM and PCI-DSS"
 
 #### Product Owner
 - **Steering loaded:** `backlog-standards.md` (auto — activates for sprint planning topics)
 - **Skill:** Type `/backlog-management` for prioritization framework and Definition of Done
-- **Subagent:** Ask Kiro to prioritize the backlog — it spawns `story-prioritizer` which weighs regulatory urgency, customer impact, and technical risk
+- **Subagent:** Ask Kiro to prioritize the backlog — invoke `story-prioritizer` which weighs regulatory urgency, customer impact, and technical risk
 - **Example prompt:** "Prioritize these 15 backlog items for next sprint, considering the MAS audit deadline in 3 weeks"
 
 #### Project Manager
 - **Steering loaded:** `backlog-standards.md` (auto)
 - **Skill:** Type `/sprint-planning` for velocity tracking and capacity planning
-- **Subagent:** Ask Kiro to assess risks — it spawns `risk-assessor` with the banking risk matrix
+- **Subagent:** Ask Kiro to assess risks — invoke `risk-assessor` with the banking risk matrix
 - **Hook:** `post-batch-sync` (Agent Stop) — automatically checks for TODO/FIXME markers and uncommitted changes after every agent turn
 - **Example prompt:** "Assess the risks for the payment gateway migration planned for Sprint 44"
 
@@ -148,7 +131,7 @@ config/                ← Protected paths configuration
 #### Software Architect
 - **Steering loaded:** `architecture-standards.md` (auto — activates for design discussions), `tech.md` (always)
 - **Skill:** Type `/architecture-review` for ADR template and review checklist
-- **Subagent:** Ask Kiro to review a design — it spawns `architecture-reviewer` which checks scalability, security, resilience, and MAS compliance
+- **Subagent:** Ask Kiro to review a design — invoke `architecture-reviewer` which checks scalability, security, resilience, and MAS compliance
 - **Example prompt:** "Review the architecture design in docs/architecture/ADR-005-payment-gateway.md"
 
 #### UX Designer
@@ -168,14 +151,14 @@ config/                ← Protected paths configuration
 #### Frontend Developer
 - **Steering loaded:** `frontend-standards.md` (fileMatch — auto-loads when editing .tsx/.ts files), `tech.md` (always)
 - **Skill:** Type `/api-contract` when integrating with backend APIs
-- **Subagent:** Ask Kiro to build a component — it spawns `frontend-builder` with React/TypeScript/accessibility context
+- **Subagent:** Ask Kiro to build a component — invoke `frontend-builder` with React/TypeScript/accessibility context
 - **Hook:** `coding-standard-guard` (Pre Tool Use) — blocks writes missing license headers or violating naming conventions
 - **Example prompt:** "Build the TransactionList component following our design system, with proper money formatting and accessibility"
 
 #### Backend Developer
 - **Steering loaded:** `api-standards.md` (fileMatch — activates for controller/API files), `database-standards.md` (fileMatch — activates for SQL/repository files), `tech.md` (always)
 - **Skill:** Type `/api-contract` for OpenAPI spec design
-- **Subagent:** Ask Kiro to build an API — it spawns `backend-builder` with Java/Spring Boot/DDD context
+- **Subagent:** Ask Kiro to build an API — invoke `backend-builder` with Java/Spring Boot/DDD context
 - **Hooks:**
   - `credential-guard` (Pre Tool Use) — blocks any write containing hardcoded credentials
   - `db-write-guard` (Pre Tool Use) — blocks dangerous SQL mutations
@@ -190,14 +173,14 @@ config/                ← Protected paths configuration
 #### QA Engineer
 - **Steering loaded:** `testing-standards.md` (fileMatch — activates when editing test files)
 - **Skill:** Type `/test-strategy` for test pyramid and banking-specific test scenarios
-- **Subagent:** Ask Kiro to run tests — it spawns `test-runner` which executes unit → integration → contract tests
+- **Subagent:** Ask Kiro to run tests — invoke `test-runner` which executes unit → integration → contract tests
 - **Hook:** `test-coverage-gate` (Post Task Execution) — checks coverage after each spec task completes
 - **Example prompt:** "Analyze test coverage for the transaction module and identify gaps in boundary value testing"
 
 #### Security Engineer
 - **Steering loaded:** `security-policy.md` (always)
 - **Skill:** Type `/security-audit` for OWASP Top 10 checklist and banking-specific security checks
-- **Subagent:** Ask Kiro to scan for vulnerabilities — it spawns `security-scanner` with Snyk integration
+- **Subagent:** Ask Kiro to scan for vulnerabilities — invoke `security-scanner` with Snyk integration
 - **Hooks:**
   - `credential-guard` (Pre Tool Use) — blocks credential leaks
   - `security-audit` (Manual Trigger) — click ▷ in Agent Hooks panel for full codebase audit
@@ -209,7 +192,7 @@ config/                ← Protected paths configuration
 #### DevOps Engineer
 - **Steering loaded:** `deployment-workflow.md` (auto — activates for deployment topics), `tech.md` (always)
 - **Skill:** Type `/deployment-checklist` for pre-deployment verification
-- **Subagent:** Ask Kiro to build infrastructure — it spawns `infra-builder` with AWS CDK context
+- **Subagent:** Ask Kiro to build infrastructure — invoke `infra-builder` with AWS CDK context
 - **Hook:** `block-prod-writes` (Pre Tool Use) — blocks any write to production-protected paths
 - **Powers:** Install **AWS CDK/CloudFormation**, **AWS Observability**, and optionally **IAM Policy Autopilot**
 - **Example prompt:** "Review the CDK diff for the ECS service update and assess deployment risk"
@@ -217,14 +200,14 @@ config/                ← Protected paths configuration
 #### Site Reliability Engineer (SRE)
 - **Steering loaded:** `sre-runbook.md` (auto — activates for monitoring/incident topics)
 - **Skill:** Type `/incident-response` for incident response flow and post-mortem template
-- **Subagent:** Ask Kiro to analyze metrics — it spawns `observability-analyst` with SLO targets
+- **Subagent:** Ask Kiro to analyze metrics — invoke `observability-analyst` with SLO targets
 - **Powers:** Install **Datadog** and **AWS Observability** Powers
 - **Example prompt:** "Analyze the error rate spike on transaction-service from the last 2 hours and correlate with recent deployments"
 
 #### Database Administrator (DBA)
 - **Steering loaded:** `database-standards.md` (fileMatch — activates for SQL/migration files)
 - **Skill:** Type `/db-migration` for Flyway migration template and safety rules
-- **Subagent:** Ask Kiro to analyze the schema — it spawns `db-reader` (read-only, with Aurora DSQL access)
+- **Subagent:** Ask Kiro to analyze the schema — invoke `db-reader` (read-only, with Aurora DSQL access)
 - **Hook:** `db-write-guard` (Pre Tool Use) — blocks INSERT/UPDATE/DELETE/DROP outside migrations
 - **Power:** Install **Aurora DSQL** Power
 - **Example prompt:** "Review the migration V042__add_transaction_limits.sql for safety and performance impact"
@@ -382,6 +365,40 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 - **Powers are IDE-only** — CLI support is planned for the future.
 - **`auto` steering requires `name` + `description`** — Without both fields, auto-inclusion won't work.
 - **`fileMatch` steering requires `fileMatchPattern`** — Must be an array of glob patterns.
+
+---
+
+## Abbreviations
+
+| Term | Meaning |
+|------|---------|
+| BA | Business Analyst |
+| PO | Product Owner |
+| QA | Quality Assurance |
+| SRE | Site Reliability Engineer |
+| DBA | Database Administrator |
+| CISO | Chief Information Security Officer |
+| CAB | Change Advisory Board |
+| SDLC | Software Development Life Cycle |
+| ADR | Architecture Decision Record |
+| IaC | Infrastructure as Code |
+| CDK | AWS Cloud Development Kit |
+| SAST | Static Application Security Testing |
+| DAST | Dynamic Application Security Testing |
+| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
+| OWASP | Open Worldwide Application Security Project |
+| CVE | Common Vulnerabilities and Exposures |
+| MFA | Multi-Factor Authentication |
+| JWT | JSON Web Token |
+| RBAC | Role-Based Access Control |
+| DDD | Domain-Driven Design |
+| DR | Disaster Recovery |
+| RTO / RPO | Recovery Time Objective / Recovery Point Objective |
+| SLO | Service Level Objective |
+| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
+| PCI-DSS | Payment Card Industry Data Security Standard |
+| PDPA | Personal Data Protection Act (Singapore) |
+| SOX | Sarbanes-Oxley Act |
 
 ---
 
