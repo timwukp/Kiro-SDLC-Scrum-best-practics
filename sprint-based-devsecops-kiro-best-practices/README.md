@@ -216,6 +216,26 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 
 ---
 
+## Subagent Inheritance
+
+How Kiro's five elements behave inside custom subagents (`.kiro/agents/*.md`):
+
+| Element | Inherited by Subagents? | Notes |
+|---------|------------------------|-------|
+| **Steering** | Yes (auto-inherited) | Works exactly as in the main agent |
+| **MCP** | Opt-in (`includeMcpJson: true`) | Default: false |
+| **Powers** | Opt-in (`includePowers: true`) | Default: false |
+| **Hooks** | No | Hooks fire in the main agent only |
+| **Specs** | No | Subagents do not have access to Specs |
+| **Skills (IDE)** | No | No opt-in mechanism exists in IDE mode |
+| **Skills (CLI)** | Opt-in (`resources: ["skill://..."]`) | CLI-only URI scheme |
+
+> **Architecture note:** Skills must be dispatched by the Main Agent. Subagents receive delegated tasks, not skill invocations. The KF-005 observation ("Skills always activated in main agent context") is confirmed and expected behavior.
+
+> **Warning:** Do not bulk-migrate Skill content into Steering files as a workaround. Steering is always-on in every context (loaded automatically based on inclusion mode), while Skills use progressive disclosure (on-demand loading via slash commands). Mixing them defeats the purpose of both: Steering becomes bloated and Skills lose their targeted, just-in-time nature.
+
+---
+
 ## Architecture Principles
 
 1. **Agentic AI as Digital Teammate** — AI agents provide templates, checklists, and scan triage to accelerate the team
@@ -224,9 +244,10 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 4. **Documented deployment patterns** — Canary release and rollback procedures defined in steering
 5. **Steering instructs; Hooks enforce** — Pre Tool Use and Prompt Submit Shell hooks provide 100% deterministic enforcement
 6. **Hooks fire in main agent only** — critical enforcement flows through the main agent
-7. **Steering + MCP propagate to subagents** — security context inherited automatically
+7. **Steering + MCP propagate to subagents; Skills do NOT** — Steering and MCP are inherited automatically; Skills, Hooks, and Specs are main-agent-only
 8. **Shell Command = free; Agent Prompt = credits** — use Shell for deterministic checks
 9. **Every developer is a Security Developer** — not a separate team's problem
+10. **Skills are main-agent-only** — Subagents cannot invoke or inherit Skills; all skill-driven workflows route through the main agent
 
 ---
 
@@ -236,6 +257,8 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 - **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
 - **Post Tool Use hooks are advisory, not blocking** — The Security Self-Heal Check hook suggests fixes but cannot block the write operation. Only Pre Tool Use and Prompt Submit hooks can block.
 - **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers. The npm package `@modelcontextprotocol/server-github` is the standard MCP GitHub server. Kiro's MCP server directory may show alternative URL-based configs.
+- **Skills are NOT inherited by subagents (IDE)** — Confirmed: no opt-in mechanism exists. Skills must be dispatched by the main agent. In CLI mode, Skills can be opted in via `resources: ["skill://..."]` URI scheme.
+- **Do not bulk-migrate Skills into Steering** — Steering is always-on (auto-loaded); Skills use progressive disclosure (on-demand). Merging them bloats context and defeats progressive disclosure.
 
 ---
 
