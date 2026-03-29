@@ -91,6 +91,9 @@ How Kiro's five elements behave inside custom subagents (`.kiro/agents/*.md`):
 
 > **Warning:** Do not bulk-migrate Skill content into Steering files. Steering is always-on in every context, while Skills use progressive disclosure (on-demand loading). Mixing them defeats the purpose of both.
 
+For a detailed technical workflow diagram including hook blocking behavior, subagent inheritance rules, and test-verified findings, see [kiro-workflow-diagram.md](./kiro-workflow-diagram.md) ([中文版](./kiro-workflow-diagram.zh-CN.md)).
+
+
 ## Setup
 
 ### Option A: Apply to your existing project

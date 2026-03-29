@@ -91,6 +91,9 @@ Kiro 五元素在自訂 Subagents（`.kiro/agents/*.md`）中的繼承行為：
 
 > **警告：** 請勿將 Skill 內容批量遷移至 Steering 檔案。Steering 在所有上下文中始終啟用（根據包含模式自動載入），而 Skills 使用漸進式揭露（按需載入）。混合使用會破壞兩者的設計目的。
 
+詳細的技術工作流程圖（包含 hook 阻擋行為、subagent 繼承規則、測試驗證發現），請參閱 [kiro-workflow-diagram.md](./kiro-workflow-diagram.md)（[English](./kiro-workflow-diagram.md) | [中文](./kiro-workflow-diagram.zh-CN.md)）。
+
+
 ## 安裝
 
 ### 方式 A：套用到你的現有專案
