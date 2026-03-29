@@ -1,4 +1,4 @@
-# Banking Phase-Based SDLC — Kiro Five-Element Best Practices
+# Enterprise Phase-Based SDLC — Kiro Five-Element Best Practices
 
 A complete, ready-to-use [Kiro IDE](https://kiro.dev) configuration for enterprise teams organized by development phases and specialized roles. Covers 14 roles across 5 linear phases (Planning → Design → Development → Testing → Deployment) with role-specific Steering, Subagents, Skills, Hooks, and MCP/Powers.
 

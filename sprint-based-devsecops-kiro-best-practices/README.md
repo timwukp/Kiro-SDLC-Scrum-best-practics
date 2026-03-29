@@ -1,4 +1,4 @@
-# Banking Sprint-Based DevSecOps — Kiro Five-Element Best Practices
+# Enterprise Sprint-Based DevSecOps — Kiro Five-Element Best Practices
 
 A complete [Kiro IDE](https://kiro.dev) configuration for enterprise teams running Scrum Sprints with security shift-left. Every Sprint, every commit — security is baked in from Day 1, not a final gate.
 
