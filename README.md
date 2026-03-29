@@ -47,9 +47,10 @@ Phase-based SDLC approach organized by 14 roles across 5 phases.
 |---------|-------|-----------|
 | Steering | 13 | Role-based: BA, Architect, Frontend, Backend, QA, DevOps, SRE, DBA |
 | Subagents | 14 | One per SDLC role (requirements-validator, backend-builder, test-runner, etc.) |
-| Skills | 14 | requirements-gathering, sprint-planning, code-standards, deployment-checklist |
-| Hooks | 8 | Credential guard, prod write lock, DB write guard, coding standards |
-| Scripts | 6 | Shell scripts for deterministic enforcement |
+| Skills | 15 | requirements-gathering, sprint-planning, code-standards, threat-modeling, deployment-checklist |
+| Hooks | 10 | Credential guard, prod write lock, DB write guard, coding standards, data residency guard, scope audit |
+| Scripts | 8 | Shell scripts for deterministic enforcement |
+| Compliance Docs | 7 | DR plan, pen testing, vendor risk register, board reporting, SIEM, threat modeling process |
 
 ### [sprint-based-devsecops-kiro-best-practices/](./sprint-based-devsecops-kiro-best-practices/)
 DevSecOps + Scrum approach with Agentic AI as Digital Teammate.
@@ -59,8 +60,9 @@ DevSecOps + Scrum approach with Agentic AI as Digital Teammate.
 | Steering | 17 | Scrum Guide principles + DevSecOps: Three Pillars, Sprint Goal crafting, INVEST, Kanban flow metrics, Scrum Master 6 stances, Zombie Scrum anti-patterns, UX dual-track |
 | Subagents | 15 | Scrum-specific: security-champion, threat-modeler, pipeline-builder + self-healing code-reviewer |
 | Skills | 14 | threat-modeling, security-story-writing, chaos-security-testing, sprint-security-review, retro-pipeline-review |
-| Hooks | 8 | Same enforcement + Security Self-Heal Check (AI detects vulns and suggests fixes in real-time) |
-| Scripts | 5 | Shell scripts for deterministic enforcement |
+| Hooks | 10 | Same enforcement + Security Self-Heal Check, data residency guard, scope audit |
+| Scripts | 7 | Shell scripts for deterministic enforcement |
+| Compliance Docs | 6 | DR plan, pen testing, vendor risk register, board reporting, SIEM integration |
 
 ## What They Share (Same Banking Context)
 
@@ -78,7 +80,7 @@ If you're new to Kiro, here's what these configurations give you:
 
 1. **Steering** (`.kiro/steering/`) — Context files that tell Kiro about your project standards. They load automatically based on what you're working on.
 
-2. **Subagents** (`.kiro/agents/`) — Specialized AI teammates. Ask Kiro to "review the architecture" and it spawns the `architecture-reviewer` agent with the right context and tools.
+2. **Subagents** (`.kiro/agents/`) — Specialized AI teammates with isolated context and tools. Invoke explicitly via slash command or from within a skill's execution flow.
 
 3. **Skills** (`.kiro/skills/`) — Reusable workflows. Type `/threat-modeling` in chat to get the STRIDE threat model template.
 
@@ -102,10 +104,14 @@ cp phase-based-sdlc-kiro-best-practices/AGENTS.md /path/to/your-project/
 # OR
 cp sprint-based-devsecops-kiro-best-practices/AGENTS.md /path/to/your-project/
 
-# 4. Make hook scripts executable
+# 4. Copy reference docs and config (recommended)
+cp -r phase-based-sdlc-kiro-best-practices/docs /path/to/your-project/
+cp -r phase-based-sdlc-kiro-best-practices/config /path/to/your-project/
+
+# 5. Make hook scripts executable
 chmod +x /path/to/your-project/.kiro/hooks/scripts/*.sh
 
-# 5. Open your project in Kiro IDE — steering loads automatically
+# 6. Open your project in Kiro IDE — steering loads automatically
 ```
 
 ## Kiro Five-Element Architecture
@@ -117,10 +123,14 @@ Both configurations are built on the [Kiro Five-Element Architecture](https://ki
 | Steering | Context and standards | Instructs the AI (soft guidance, ~70% compliance) |
 | Hooks | Enforcement guardrails | Enforces rules (Pre Tool Use Shell = 100% deterministic) |
 | Skills | Reusable workflows | Progressive disclosure (loads on demand via `/skill-name`) |
-| Subagents | Specialized AI teammates | Isolated context, parallel execution, auto-selected by description |
+| Subagents | Specialized AI teammates | Isolated context, parallel execution, invoked explicitly or from skill flows |
 | MCP/Powers | External tool integration | GitHub, Jira, Snyk, Datadog, Aurora DSQL, Figma |
 
 Core rule: **Steering instructs; Hooks enforce.** If a guardrail must be 100% enforced, it must be a Pre Tool Use Shell Command hook.
+
+## Tested & Validated
+
+These configurations were comprehensively tested with 23 automated shell scripts (934 assertions, 96.47% pass rate), 28 skill activation evals (100% after refinement), 8 negative activation tests (zero false positives), and 4 quality evals (security scan, compliance audit, change request, banking rules). Key findings and all fixes are documented in [Issue #1](https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics/issues/1).
 
 ## References
 
