@@ -73,6 +73,24 @@ Both configurations are built on the [Kiro Five-Element Architecture](https://ki
 
 Core rule: **Steering instructs; Hooks enforce.** If a guardrail must be 100% enforced, it must be a Pre Tool Use Shell Command hook.
 
+### Subagent Inheritance
+
+How Kiro's five elements behave inside custom subagents (`.kiro/agents/*.md`):
+
+| Element | Inherited by Subagents? | Notes |
+|---------|------------------------|-------|
+| **Steering** | Yes (auto-inherited) | Works exactly as in the main agent |
+| **MCP** | Opt-in (`includeMcpJson: true`) | Default: false |
+| **Powers** | Opt-in (`includePowers: true`) | Default: false |
+| **Hooks** | No | Hooks fire in the main agent only |
+| **Specs** | No | Subagents do not have access to Specs |
+| **Skills (IDE)** | No | No opt-in mechanism exists in IDE mode |
+| **Skills (CLI)** | Opt-in (`resources: ["skill://..."]`) | CLI-only URI scheme |
+
+> **Architecture note:** Skills must be dispatched by the Main Agent. Subagents receive delegated tasks, not skill invocations.
+
+> **Warning:** Do not bulk-migrate Skill content into Steering files. Steering is always-on in every context, while Skills use progressive disclosure (on-demand loading). Mixing them defeats the purpose of both.
+
 ## Setup
 
 ### Option A: Apply to your existing project

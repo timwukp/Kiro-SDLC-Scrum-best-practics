@@ -245,6 +245,26 @@ config/                ← Protected paths configuration
 
 ---
 
+## Subagent Inheritance
+
+How Kiro's five elements behave inside custom subagents (`.kiro/agents/*.md`):
+
+| Element | Inherited by Subagents? | Notes |
+|---------|------------------------|-------|
+| **Steering** | Yes (auto-inherited) | Works exactly as in the main agent |
+| **MCP** | Opt-in (`includeMcpJson: true`) | Default: false |
+| **Powers** | Opt-in (`includePowers: true`) | Default: false |
+| **Hooks** | No | Hooks fire in the main agent only |
+| **Specs** | No | Subagents do not have access to Specs |
+| **Skills (IDE)** | No | No opt-in mechanism exists in IDE mode |
+| **Skills (CLI)** | Opt-in (`resources: ["skill://..."]`) | CLI-only URI scheme |
+
+> **Architecture note:** Skills must be dispatched by the Main Agent. Subagents receive delegated tasks, not skill invocations. The KF-005 observation ("Skills always activated in main agent context") is confirmed and expected behavior.
+
+> **Warning:** Do not bulk-migrate Skill content into Steering files as a workaround. Steering is always-on in every context (loaded automatically based on inclusion mode), while Skills use progressive disclosure (on-demand loading via slash commands). Mixing them defeats the purpose of both: Steering becomes bloated and Skills lose their targeted, just-in-time nature.
+
+---
+
 ## Subagent Quick Reference
 
 | Subagent | Invocation | Tools | Use Case |
@@ -350,9 +370,10 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 
 1. **Steering instructs; Hooks enforce** — Steering provides context (soft guidance); Pre Tool Use Shell hooks provide 100% deterministic enforcement
 2. **Hooks fire in main agent only** — Design critical enforcement flows through the main agent, not subagents
-3. **Steering + MCP propagate to subagents** — Quality context is inherited automatically without extra configuration
+3. **Steering + MCP propagate to subagents; Skills do NOT** — Steering and MCP are inherited automatically; Skills, Hooks, and Specs are main-agent-only
 4. **Shell Command = free; Agent Prompt = credits** — Use Shell for deterministic checks, Agent Prompt only when LLM reasoning is needed
 5. **Pre Tool Use blocks; Post Tool Use advises** — Only Pre Tool Use and Prompt Submit + non-zero exit code can block operations
+6. **Skills are main-agent-only** — Subagents cannot invoke or inherit Skills; all skill-driven workflows route through the main agent
 
 ---
 
@@ -365,6 +386,8 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 - **Powers are IDE-only** — CLI support is planned for the future.
 - **`auto` steering requires `name` + `description`** — Without both fields, auto-inclusion won't work.
 - **`fileMatch` steering requires `fileMatchPattern`** — Must be an array of glob patterns.
+- **Skills are NOT inherited by subagents (IDE)** — Confirmed: no opt-in mechanism exists. Skills must be dispatched by the main agent. In CLI mode, Skills can be opted in via `resources: ["skill://..."]` URI scheme.
+- **Do not bulk-migrate Skills into Steering** — Steering is always-on (auto-loaded); Skills use progressive disclosure (on-demand). Merging them bloats context and defeats progressive disclosure.
 
 ---
 

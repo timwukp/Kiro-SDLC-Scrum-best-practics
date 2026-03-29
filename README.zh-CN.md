@@ -73,6 +73,24 @@ DevSecOps + Scrum 方法，AI 作為數位隊友。
 
 核心規則：**Steering 指示；Hooks 執行。** 如果護欄必須 100% 執行，它必須是 Pre Tool Use Shell Command hook。
 
+### Subagent 繼承行為
+
+Kiro 五元素在自訂 Subagents（`.kiro/agents/*.md`）中的繼承行為：
+
+| 元素 | 是否被 Subagent 繼承？ | 備註 |
+|------|----------------------|------|
+| **Steering** | 是（自動繼承） | 與主代理中的行為完全相同 |
+| **MCP** | 選擇性啟用（`includeMcpJson: true`） | 預設：false |
+| **Powers** | 選擇性啟用（`includePowers: true`） | 預設：false |
+| **Hooks** | 否 | Hooks 僅在主代理中觸發 |
+| **Specs** | 否 | Subagents 無法存取 Specs |
+| **Skills（IDE）** | 否 | IDE 模式中無選擇性啟用機制 |
+| **Skills（CLI）** | 選擇性啟用（`resources: ["skill://..."]`） | 僅限 CLI 的 URI 機制 |
+
+> **架構備註：** Skills 必須由主代理（Main Agent）調度。Subagents 接收委派任務，而非 Skill 調用。
+
+> **警告：** 請勿將 Skill 內容批量遷移至 Steering 檔案。Steering 在所有上下文中始終啟用（根據包含模式自動載入），而 Skills 使用漸進式揭露（按需載入）。混合使用會破壞兩者的設計目的。
+
 ## 安裝
 
 ### 方式 A：套用到你的現有專案
