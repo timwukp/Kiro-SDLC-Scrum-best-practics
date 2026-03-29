@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Project Scope Audit",
+  "description": "Audits agent stop events to detect off-topic usage of Kiro credits outside the banking platform project scope.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": ".kiro/hooks/scripts/audit-prompt-scope.sh"
+  }
+}
