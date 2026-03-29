@@ -36,6 +36,45 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) and the [2
 - **Compliance:** MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA
 - **Pipeline:** GitHub Actions + SonarQube + Snyk + OWASP ZAP
 
+### Abbreviations
+
+| Term | Meaning |
+|------|---------|
+| PO | Product Owner (Scrum accountability) |
+| SM | Scrum Master (Scrum accountability) |
+| BA | Business Analyst |
+| SRE | Site Reliability Engineer |
+| DBA | Database Administrator |
+| CISO | Chief Information Security Officer |
+| CAB | Change Advisory Board |
+| SDLC | Software Development Life Cycle |
+| ADR | Architecture Decision Record |
+| IaC | Infrastructure as Code |
+| CDK | AWS Cloud Development Kit |
+| SAST | Static Application Security Testing |
+| DAST | Dynamic Application Security Testing |
+| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
+| IDOR | Insecure Direct Object Reference |
+| OWASP | Open Worldwide Application Security Project |
+| CVE | Common Vulnerabilities and Exposures |
+| CWE | Common Weakness Enumeration |
+| MFA | Multi-Factor Authentication |
+| JWT | JSON Web Token |
+| mTLS | Mutual Transport Layer Security |
+| RBAC | Role-Based Access Control |
+| DDD | Domain-Driven Design |
+| DR | Disaster Recovery |
+| RTO | Recovery Time Objective |
+| RPO | Recovery Point Objective |
+| SLO | Service Level Objective |
+| SLI | Service Level Indicator |
+| DORA | DevOps Research and Assessment (metrics) |
+| MTTR | Mean Time to Recovery |
+| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
+| PCI-DSS | Payment Card Industry Data Security Standard |
+| PDPA | Personal Data Protection Act (Singapore) |
+| SOX | Sarbanes-Oxley Act |
+
 ---
 
 ## Quick Start (5 Minutes)
