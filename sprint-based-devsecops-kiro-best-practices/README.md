@@ -2,7 +2,7 @@
 
 A complete [Kiro IDE](https://kiro.dev) configuration for enterprise teams running Scrum Sprints with security shift-left. Every Sprint, every commit — security is baked in from Day 1, not a final gate.
 
-Kiro AI agents act as **Digital Teammates** embedded in the Scrum process — performing automated threat modeling, self-healing code vulnerabilities, chaos security testing, and autonomous canary rollback.
+Kiro AI agents act as **Digital Teammates** embedded in the Scrum process — providing threat modeling templates, security scan triage, chaos testing checklists, and deployment monitoring guidance.
 
 This is the **Sprint-based DevSecOps** approach. If your team follows linear development phases with specialized roles, see [phase-based-sdlc-kiro-best-practices/](../phase-based-sdlc-kiro-best-practices/) instead.
 
@@ -12,11 +12,11 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) and the [2
 
 | Sprint Phase | AI Agent Behavior |
 |-------------|-------------------|
-| Planning (PO/BA) | Automated threat modeling on every user story. Calculates Security Debt vs Feature Value ratio. |
-| Design (Architect) | Auto-audits IaC (CDK/Terraform) for Zero Trust compliance before human review. |
-| Development (Team) | Detects vulnerabilities and provides self-healing fixes. Generates security regression tests. |
-| Testing (QA/Security) | Runs chaos security testing — proactively "hacks" the Sprint output and reports to Daily Scrum. |
-| Deployment (DevOps/SRE) | Monitors canary deployment. Autonomously rolls back on security anomaly and notifies team. |
+| Planning (PO/BA) | `/threat-modeling` skill provides STRIDE template. Backlog skill includes Security Debt vs Feature Value framework. |
+| Design (Architect) | `data-residency-guard` hook blocks non-compliant regions. `/architecture-review` skill provides Zero Trust checklist. |
+| Development (Team) | `security-self-heal-check` hook (Post Tool Use) suggests fixes after writes. `credential-guard` blocks leaked secrets. |
+| Testing (QA/Security) | `/chaos-security-testing` skill provides attack checklists (IDOR, injection, auth bypass) for manual or AI-assisted execution. |
+| Deployment (DevOps/SRE) | `pipeline-standards.md` steering documents canary deployment patterns. `block-prod-writes` hook enforces CAB approval. |
 
 ## Key Difference from Phase-Based SDLC
 
@@ -152,7 +152,7 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 #### QA Engineer — "Automated Quality Engineer"
 - **Steering:** `testing-standards.md` (fileMatch)
 - **Subagent:** `test-runner` — includes security regression testing
-- **Skill:** `/chaos-security-testing` — AI proactively "hacks" the Sprint output (IDOR, injection, auth bypass)
+- **Skill:** `/chaos-security-testing` — provides attack checklists for the Sprint output (IDOR, injection, auth bypass)
 - **Hook:** `test-coverage-gate` (Post Task) — checks coverage thresholds
 - **Example:** "Run chaos security tests against the new payment API — try IDOR, injection, and auth bypass attacks"
 
@@ -218,10 +218,10 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 
 ## Architecture Principles
 
-1. **Agentic AI as Digital Teammate** — AI agents are proactive participants, not passive tools
-2. **Security is shift-left** — automated scanning on every commit, not just before release
-3. **Self-healing development** — AI detects vulnerabilities and provides corrected code before peer review
-4. **Autonomous deployment** — AI monitors canary releases and rolls back on security anomaly
+1. **Agentic AI as Digital Teammate** — AI agents provide templates, checklists, and scan triage to accelerate the team
+2. **Security is shift-left** — scanning hooks run on every commit, not just before release
+3. **AI-assisted security review** — Post Tool Use hook suggests fixes after writes (advisory, not blocking)
+4. **Documented deployment patterns** — Canary release and rollback procedures defined in steering
 5. **Steering instructs; Hooks enforce** — Pre Tool Use and Prompt Submit Shell hooks provide 100% deterministic enforcement
 6. **Hooks fire in main agent only** — critical enforcement flows through the main agent
 7. **Steering + MCP propagate to subagents** — security context inherited automatically

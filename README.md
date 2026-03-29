@@ -10,7 +10,7 @@ Two approaches to the same enterprise project — pick the one that matches how 
 | **Work flow** | Requirements → Design → Development → Testing → Deployment | 2-week Sprints: Plan → Code → Scan → Test → Release → Monitor |
 | **Security** | Testing phase (near the end) | Every Sprint, every commit (shift-left) |
 | **Who owns security** | Security Engineer team | Everyone — every developer is a "Security Developer" |
-| **AI approach** | AI assists each role separately | AI as "Digital Teammate" — self-healing code, autonomous rollback |
+| **AI approach** | AI assists each role separately | AI as "Digital Teammate" — security scan triage, threat modeling templates, deployment checklists |
 | **Release cadence** | After all phases complete | At least once per Sprint |
 | **Folder** | [`phase-based-sdlc-kiro-best-practices/`](./phase-based-sdlc-kiro-best-practices/) | [`sprint-based-devsecops-kiro-best-practices/`](./sprint-based-devsecops-kiro-best-practices/) |
 
@@ -41,7 +41,7 @@ DevSecOps + Scrum approach with Agentic AI as Digital Teammate.
 | Element | Count | Highlights |
 |---------|-------|-----------|
 | Steering | 17 | Scrum Guide principles + DevSecOps: Three Pillars, Sprint Goal crafting, INVEST, Kanban flow metrics, Scrum Master 6 stances, Zombie Scrum anti-patterns, UX dual-track |
-| Subagents | 15 | Scrum-specific: security-champion, threat-modeler, pipeline-builder + self-healing code-reviewer |
+| Subagents | 15 | Scrum-specific: security-champion, threat-modeler, pipeline-builder + security-aware code-reviewer |
 | Skills | 14 | threat-modeling, security-story-writing, chaos-security-testing, sprint-security-review, retro-pipeline-review |
 | Hooks | 10 | Same enforcement + Security Self-Heal Check, data residency guard, scope audit |
 | Scripts | 7 | Shell scripts for deterministic enforcement |
