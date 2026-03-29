@@ -2,6 +2,8 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
+> **Disclaimer:** This is an unofficial, community-maintained project. It is not affiliated with, endorsed by, or sponsored by AWS or the Kiro team. All configurations, findings, and recommendations are based on publicly available documentation and testing — they do not constitute official guidance. This project is provided "as-is" without warranty of any kind under the [MIT License](./LICENSE). For authoritative information, refer to [kiro.dev/docs](https://kiro.dev/docs/).
+
 Ready-to-use [Kiro IDE](https://kiro.dev) configurations for enterprise software development teams. [Kiro](https://kiro.dev) is an AI-powered IDE that uses steering files, hooks, skills, subagents, and MCP integrations to embed project standards directly into your development workflow.
 
 Two approaches to the same enterprise project — pick the one that matches how your team works:

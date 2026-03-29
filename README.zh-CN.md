@@ -2,6 +2,8 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
+> **免責聲明：** 本專案為非官方的社群維護專案，與 AWS 或 Kiro 團隊無關，未獲其認可或贊助。所有配置、發現和建議均基於公開文件和測試，不構成官方指引。本專案依 [MIT License](./LICENSE) 按「現狀」提供，不附帶任何形式的保證。權威資訊請參閱 [kiro.dev/docs](https://kiro.dev/docs/)。
+
 開箱即用的 [Kiro IDE](https://kiro.dev) 配置，適用於企業軟體開發團隊。[Kiro](https://kiro.dev) 是一款 AI 驅動的 IDE，透過 Steering 檔案、Hooks、Skills、Subagents 和 MCP 整合，將專案標準直接嵌入開發工作流程。
 
 同一個企業專案的兩種方法 — 選擇適合你團隊的方式：
