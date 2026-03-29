@@ -75,9 +75,9 @@ Open your banking project folder in Kiro IDE. The steering files load automatica
 .kiro/
 ├── steering/          ← 13 steering files (always, auto, fileMatch)
 ├── agents/            ← 14 role-specific subagents
-├── skills/            ← 14 skill packages with references
-├── hooks/             ← 8 hook configs (.kiro.hook JSON)
-│   └── scripts/       ← 6 shell scripts for deterministic enforcement
+├── skills/            ← 15 skill packages with references
+├── hooks/             ← 10 hook configs (.kiro.hook JSON)
+│   └── scripts/       ← 8 shell scripts for deterministic enforcement
 └── settings/
     └── mcp.json       ← GitHub + Jira + Confluence MCP config
 AGENTS.md              ← Always-included agent guidelines
@@ -222,6 +222,8 @@ config/                ← Protected paths configuration
 | Post-Batch Sync | Agent Stop | Shell Command | Free | No |
 | Security Audit | Manual Trigger | Agent Prompt | Credits | No |
 | Test Coverage Gate | Post Task Execution | Shell Command | Free | No |
+| Data Residency Guard | Pre Tool Use (write) | Shell Command | Free | Yes |
+| Prompt Scope Audit | Agent Stop | Shell Command | Free | No |
 
 **Key principle:** Deterministic enforcement uses Shell Command (free, 100% reliable). LLM-reasoning checks use Agent Prompt (costs credits). Only Pre Tool Use and Prompt Submit hooks can block operations.
 
@@ -231,22 +233,22 @@ config/                ← Protected paths configuration
 
 | Subagent | Invocation | Tools | Use Case |
 |----------|-----------|-------|----------|
-| `/requirements-validator` | Auto or explicit | read | Validate user stories for completeness and compliance |
-| `/story-prioritizer` | Auto or explicit | read | Prioritize backlog by regulatory urgency and business value |
-| `/risk-assessor` | Auto or explicit | read | Assess project risks (timeline, technical, regulatory) |
-| `/architecture-reviewer` | Auto or explicit | read | Review system designs for scalability and compliance |
-| `/frontend-builder` | Auto or explicit | read, write + Powers | Build React components with accessibility |
-| `/backend-builder` | Auto or explicit | read, write, shell, @aurora-dsql | Build Java APIs with DDD and audit logging |
-| `/test-runner` | Auto or explicit | read, shell | Run test suites and analyze coverage |
-| `/security-scanner` | Auto or explicit | read, @snyk | OWASP/CVE scanning |
-| `/compliance-auditor` | Auto or explicit | read | MAS TRM / PCI-DSS gap analysis |
-| `/infra-builder` | Auto or explicit | read, write, shell + Powers | Build AWS CDK infrastructure |
-| `/db-reader` | Auto or explicit | read, @aurora-dsql | Read-only database analysis |
-| `/observability-analyst` | Auto or explicit | read + Powers | SLO monitoring and anomaly detection |
-| `/code-reviewer` | Auto or explicit | read, @snyk | Code review for correctness and standards |
-| `/change-approver` | Auto or explicit | read | CAB risk assessment for production changes |
+| `/requirements-validator` | Explicit | read | Validate user stories for completeness and compliance |
+| `/story-prioritizer` | Explicit | read | Prioritize backlog by regulatory urgency and business value |
+| `/risk-assessor` | Explicit | read | Assess project risks (timeline, technical, regulatory) |
+| `/architecture-reviewer` | Explicit | read | Review system designs for scalability and compliance |
+| `/frontend-builder` | Explicit | read, write + Powers | Build React components with accessibility |
+| `/backend-builder` | Explicit | read, write, shell, @aurora-dsql | Build Java APIs with DDD and audit logging |
+| `/test-runner` | Explicit | read, shell | Run test suites and analyze coverage |
+| `/security-scanner` | Explicit | read, @snyk | OWASP/CVE scanning |
+| `/compliance-auditor` | Explicit | read | MAS TRM / PCI-DSS gap analysis |
+| `/infra-builder` | Explicit | read, write, shell + Powers | Build AWS CDK infrastructure |
+| `/db-reader` | Explicit | read, @aurora-dsql | Read-only database analysis |
+| `/observability-analyst` | Explicit | read + Powers | SLO monitoring and anomaly detection |
+| `/code-reviewer` | Explicit | read, @snyk | Code review for correctness and standards |
+| `/change-approver` | Explicit | read | CAB risk assessment for production changes |
 
-Kiro auto-selects the appropriate subagent based on the `description` field, or you can invoke explicitly via slash command.
+Kiro subagents are invoked explicitly via slash command or from within a skill's execution flow.
 
 ---
 
@@ -255,7 +257,7 @@ Kiro auto-selects the appropriate subagent based on the `description` field, or 
 | Skill | Slash Command | When to Use |
 |-------|--------------|-------------|
 | requirements-gathering | `/requirements-gathering` | Writing user stories and acceptance criteria |
-| backlog-management | `/backlog-management` | Sprint planning and issue triage |
+| backlog-management | `/backlog-management` | Backlog refinement and issue triage |
 | sprint-planning | `/sprint-planning` | Velocity tracking and capacity planning |
 | architecture-review | `/architecture-review` | Creating ADRs and reviewing designs |
 | ux-review | `/ux-review` | Reviewing wireframes and user flows |
@@ -268,6 +270,7 @@ Kiro auto-selects the appropriate subagent based on the `description` field, or 
 | incident-response | `/incident-response` | Incident handling and post-mortems |
 | db-migration | `/db-migration` | Creating Flyway migration scripts |
 | prod-change-request | `/prod-change-request` | Preparing CAB approval documents |
+| threat-modeling | `/threat-modeling` | STRIDE threat modeling for new features and APIs |
 
 ---
 
@@ -288,7 +291,7 @@ Create a new subagent in `.kiro/agents/your-role.md`:
 ```yaml
 ---
 name: your-role-name
-description: One sentence describing what this agent does (Kiro uses this for auto-selection)
+description: One sentence describing what this agent does
 tools: ["read"]
 model: claude-sonnet-4
 ---
@@ -329,7 +332,7 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 
 ## Architecture Principles
 
-1. **Steering instructs; Hooks enforce** — Steering provides context (~70% compliance); Pre Tool Use Shell hooks provide 100% deterministic enforcement
+1. **Steering instructs; Hooks enforce** — Steering provides context (soft guidance); Pre Tool Use Shell hooks provide 100% deterministic enforcement
 2. **Hooks fire in main agent only** — Design critical enforcement flows through the main agent, not subagents
 3. **Steering + MCP propagate to subagents** — Quality context is inherited automatically without extra configuration
 4. **Shell Command = free; Agent Prompt = credits** — Use Shell for deterministic checks, Agent Prompt only when LLM reasoning is needed

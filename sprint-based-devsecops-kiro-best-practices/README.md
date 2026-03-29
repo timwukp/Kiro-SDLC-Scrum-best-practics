@@ -78,8 +78,8 @@ Add to Kiro IDE settings → "Mcp Approved Env Vars":
 ├── steering/          ← 17 steering files (always/auto/fileMatch)
 ├── agents/            ← 15 role-specific subagents
 ├── skills/            ← 14 skill packages (incl. chaos security testing)
-├── hooks/             ← 8 hook configs (.kiro.hook JSON)
-│   └── scripts/       ← 5 shell scripts for enforcement
+├── hooks/             ← 10 hook configs (.kiro.hook JSON)
+│   └── scripts/       ← 7 shell scripts for enforcement
 └── settings/
     └── mcp.json       ← GitHub + Jira MCP config
 AGENTS.md              ← Always-included DevSecOps agent guidelines
@@ -193,6 +193,8 @@ docs/                  ← Threat model templates, compliance checklists, runboo
 | Security Audit | Manual Trigger | Agent Prompt | Credits | No |
 | Test Coverage Gate | Post Task Execution | Shell | Free | No |
 | Sprint Status Sync | Agent Stop | Shell | Free | No |
+| Data Residency Guard | Pre Tool Use (write) | Shell | Free | Yes |
+| Prompt Scope Audit | Agent Stop | Shell | Free | No |
 
 ---
 
