@@ -1,6 +1,6 @@
 ---
 name: prod-change-request
-description: Preparing and documenting production change requests for banking CAB approval
+description: Prepare and document production change requests for banking CAB approval
 ---
 
 # Production Change Request Skill

@@ -1,6 +1,6 @@
 ---
 name: sprint-security-review
-description: Conducting Sprint Review security demonstrations, Green Build reports, and security metrics presentation
+description: Conduct Sprint Review security demonstrations, Green Build reports, and security metrics presentation
 ---
 
 # Sprint Security Review Skill

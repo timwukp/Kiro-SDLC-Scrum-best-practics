@@ -1,6 +1,6 @@
 ---
 name: db-migration
-description: Creating safe database migration scripts with data privacy considerations using Flyway
+description: Write and review Flyway database migration scripts with data privacy considerations and rollback safety
 ---
 
 # Database Migration Skill (Data Privacy Guardian)

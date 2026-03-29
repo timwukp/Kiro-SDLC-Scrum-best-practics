@@ -1,6 +1,6 @@
 ---
 name: ux-review
-description: Reviewing UX designs, user flows, and accessibility compliance for banking customer interfaces
+description: Review UX designs, user flows, and accessibility compliance for banking customer interfaces
 ---
 
 # UX Review Skill

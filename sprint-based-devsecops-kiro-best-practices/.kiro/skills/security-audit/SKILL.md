@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Performing OWASP Top 10 security assessments, vulnerability scanning, and PCI-DSS compliance checks
+description: Perform OWASP Top 10 security assessments, vulnerability scanning, and PCI-DSS compliance checks
 ---
 
 # Security Audit Skill

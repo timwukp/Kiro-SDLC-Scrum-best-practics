@@ -1,6 +1,6 @@
 ---
 name: threat-modeling
-description: Performing STRIDE threat modeling during Sprint Planning for new features and APIs
+description: Perform STRIDE threat modeling during Sprint Planning for new features and APIs
 ---
 
 # Threat Modeling Skill (Sprint Planning Integration)

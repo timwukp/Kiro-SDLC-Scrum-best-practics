@@ -1,7 +1,7 @@
 ---
 inclusion: auto
-name: architecture-review
-description: Architecture decisions, system design, or technical design reviews
+name: architecture-standards
+description: Architecture standards, decisions, system design, or technical design reviews
 ---
 ## Banking Architecture Standards
 

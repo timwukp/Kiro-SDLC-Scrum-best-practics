@@ -1,6 +1,6 @@
 ---
 name: ui-component-check
-description: Reviewing UI components for design system compliance, accessibility, and banking UX patterns
+description: Review UI components for design system compliance, accessibility, and banking UX patterns
 ---
 
 # UI Component Check Skill

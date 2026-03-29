@@ -1,6 +1,6 @@
 ---
 name: api-contract
-description: Designing, reviewing, and validating API contracts and OpenAPI specifications for banking services
+description: Design, review, and validate API contracts and OpenAPI specifications for banking services
 ---
 
 # API Contract Skill

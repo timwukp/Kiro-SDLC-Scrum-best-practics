@@ -1,6 +1,6 @@
 ---
 name: requirements-gathering
-description: Gathering, documenting, and validating business requirements for banking features
+description: Gather, document, and validate business requirements for banking features
 ---
 
 # Requirements Gathering Skill

@@ -1,6 +1,6 @@
 ---
 name: backlog-management
-description: Managing product backlog with security stories, sprint planning, and risk-weighted prioritization
+description: Triage Jira issues, refine user stories with security acceptance criteria, and manage risk-weighted backlog prioritization
 ---
 
 # Backlog Management Skill (Secure Value)

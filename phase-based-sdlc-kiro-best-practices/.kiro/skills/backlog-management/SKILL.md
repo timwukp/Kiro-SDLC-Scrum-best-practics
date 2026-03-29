@@ -1,6 +1,6 @@
 ---
 name: backlog-management
-description: Managing product backlog, sprint planning, story prioritization, and issue triage for banking teams
+description: Triage Jira issues, refine user stories with acceptance criteria, and manage product backlog grooming sessions
 ---
 
 # Backlog Management Skill

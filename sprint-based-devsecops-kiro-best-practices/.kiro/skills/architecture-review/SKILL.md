@@ -1,6 +1,6 @@
 ---
 name: architecture-review
-description: Reviewing architecture designs for Zero Trust compliance, secure-by-design principles, and ADR creation
+description: Create ADR documents, review architecture designs for Zero Trust compliance, and assess secure-by-design principles
 ---
 
 # Architecture Review Skill (Secure by Design)

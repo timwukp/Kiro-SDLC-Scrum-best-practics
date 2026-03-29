@@ -1,6 +1,6 @@
 ---
 name: incident-response
-description: Security incident response, production incident handling, and blameless post-mortem documentation
+description: Handle security incidents, perform root cause analysis, and write blameless post-mortem reports
 ---
 
 # Incident Response Skill

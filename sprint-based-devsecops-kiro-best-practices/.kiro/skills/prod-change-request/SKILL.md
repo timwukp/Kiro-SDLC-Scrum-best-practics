@@ -1,6 +1,6 @@
 ---
 name: prod-change-request
-description: Preparing production change requests with security impact assessment for CAB approval
+description: Prepare production change requests with security impact assessment for CAB approval
 ---
 
 # Production Change Request Skill

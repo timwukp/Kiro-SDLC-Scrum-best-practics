@@ -1,6 +1,6 @@
 ---
 name: test-strategy
-description: Designing test strategies, writing test plans, and identifying test scenarios for banking features
+description: Design test strategies, write test plans, and identify test scenarios for banking features
 ---
 
 # Test Strategy Skill
