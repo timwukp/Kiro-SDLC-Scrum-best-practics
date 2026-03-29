@@ -4,7 +4,7 @@
   "description": "Trigger compliance review when source files are saved. Reviews against MAS TRM, PCI-DSS, and PDPA requirements.",
   "version": "1",
   "when": {
-    "type": "fileSaved",
+    "type": "fileEdited",
     "patterns": ["src/**/*.java", "src/**/*.ts", "src/**/*.tsx"]
   },
   "then": {

@@ -1,6 +1,6 @@
 ---
 name: chaos-security-testing
-description: Proactive security chaos engineering — AI agent attempts to hack the Sprint output and reports findings to the team
+description: Run chaos security engineering tests — AI agent attempts to hack the Sprint output and reports findings to the team
 ---
 
 # Chaos Security Testing Skill

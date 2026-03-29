@@ -1,6 +1,6 @@
 ---
 name: incident-response
-description: Incident response procedures, root cause analysis, and post-mortem documentation for banking systems
+description: Handle production incidents, perform root cause analysis, and write blameless post-mortem reports
 ---
 
 # Incident Response Skill

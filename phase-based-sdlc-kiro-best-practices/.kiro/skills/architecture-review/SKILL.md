@@ -1,6 +1,6 @@
 ---
 name: architecture-review
-description: Reviewing and creating architecture designs, ADRs, and system diagrams for banking systems
+description: Create ADR documents, run architecture review checklists, and assess compliance impact for banking system designs
 ---
 
 # Architecture Review Skill

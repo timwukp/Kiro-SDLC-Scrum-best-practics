@@ -1,7 +1,7 @@
 ---
 inclusion: auto
-name: backlog-management
-description: Sprint planning, backlog refinement, user story writing, or issue triage
+name: backlog-standards
+description: Backlog refinement, user story writing, or issue triage
 ---
 ## Banking Backlog & Sprint Standards
 

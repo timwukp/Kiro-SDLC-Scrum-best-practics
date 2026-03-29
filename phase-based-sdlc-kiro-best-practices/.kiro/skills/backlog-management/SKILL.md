@@ -1,12 +1,12 @@
 ---
 name: backlog-management
-description: Managing product backlog, sprint planning, story prioritization, and issue triage for banking teams
+description: Triage Jira issues, refine user stories with acceptance criteria, and manage product backlog grooming sessions
 ---
 
 # Backlog Management Skill
 
 ## When to Use
-Invoke this skill for sprint planning, backlog refinement, story prioritization, or issue triage.
+Invoke this skill for backlog refinement, story writing, issue triage, or grooming sessions. NOT for sprint planning — use sprint-planning skill for that.
 
 ## Prioritization Framework (Banking-Specific)
 1. **Regulatory deadlines** (P0): MAS audit findings, PCI-DSS remediation

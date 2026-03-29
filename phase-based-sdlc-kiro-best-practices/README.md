@@ -218,7 +218,7 @@ config/                ← Protected paths configuration
 | Credential Guard | Pre Tool Use (write) | Shell Command | Free | Yes |
 | DB Write Guard | Pre Tool Use (shell, @aurora-dsql) | Shell Command | Free | Yes |
 | Coding Standard Guard | Pre Tool Use (write) | Shell Command | Free | Yes |
-| Compliance Review | File Save (src/**) | Agent Prompt | Credits | No |
+| Compliance Review | File Edited (src/**) | Agent Prompt | Credits | No |
 | Post-Batch Sync | Agent Stop | Shell Command | Free | No |
 | Security Audit | Manual Trigger | Agent Prompt | Credits | No |
 | Test Coverage Gate | Post Task Execution | Shell Command | Free | No |
@@ -339,7 +339,7 @@ Create `.kiro/hooks/your-hook.kiro.hook`:
 
 ## Important Notes
 
-- **Hook trigger type names** — This repo uses `fileSaved` which matches the official Kiro docs (kiro.dev/docs/hooks/types). The official trigger types are: Prompt Submit, Agent Stop, Pre Tool Use, Post Tool Use, File Create, File Save, File Delete, Pre Task Execution, Post Task Execution, Manual Trigger.
+- **Hook trigger type names** — This repo uses `fileEdited` for file change hooks. The official trigger types are: Prompt Submit, Agent Stop, Pre Tool Use, Post Tool Use, File Created, File Edited, File Deleted, Pre Task Execution, Post Task Execution, Manual Trigger.
 - **Hooks do NOT trigger inside subagents** — This is by design. All enforcement hooks run in the main agent only.
 - **Specs are NOT accessible inside subagents** — Confirmed Kiro limitation.
 - **GitHub and Jira are NOT official Kiro Powers** — They are configured as generic MCP servers in `mcp.json`.

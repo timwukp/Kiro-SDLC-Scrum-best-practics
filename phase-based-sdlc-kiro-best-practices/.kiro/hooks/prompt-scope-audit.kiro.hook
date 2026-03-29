@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Prompt Scope Audit",
+  "description": "Logs prompt topics for scope compliance auditing. Non-blocking audit to detect off-project Kiro usage.",
+  "version": "1.0.0",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "bash .kiro/hooks/scripts/audit-prompt-scope.sh"
+  }
+}

@@ -1,6 +1,6 @@
 ---
 name: deployment-checklist
-description: Pre-deployment verification with security gates, compliance sign-off, and rollback planning
+description: Verify pre-deployment readiness with security gates, compliance sign-off, and rollback planning
 ---
 
 # Deployment Checklist Skill (DevSecOps)

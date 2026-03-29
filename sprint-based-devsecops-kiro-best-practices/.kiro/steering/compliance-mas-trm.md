@@ -24,7 +24,7 @@ description: MAS Technology Risk Management guidelines for Singapore banking com
 - Session timeout: 15 min internal, 5 min customer-facing
 
 ### Audit & Logging
-- Audit log retention: minimum 5 years
+- Audit log retention: minimum 7 years
 - Tamper-evident logging (CloudWatch with integrity validation)
 - Real-time alerting for suspicious activities
 

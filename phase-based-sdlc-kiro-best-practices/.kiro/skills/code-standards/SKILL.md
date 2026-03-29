@@ -1,6 +1,6 @@
 ---
 name: code-standards
-description: Enforcing coding standards, naming conventions, and code quality for banking Java and TypeScript codebases
+description: Validate Java and TypeScript code against banking naming conventions, style rules, and quality standards
 ---
 
 # Code Standards Skill

@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "Data Residency Guard",
+  "description": "Verify CDK infrastructure writes enforce Singapore data residency (ap-southeast-1). Blocks non-compliant region usage for customer data resources.",
+  "version": "1.0.0",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "bash .kiro/hooks/scripts/check-data-residency.sh"
+  }
+}

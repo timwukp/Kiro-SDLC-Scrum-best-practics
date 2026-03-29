@@ -1,6 +1,6 @@
 ---
 name: pipeline-design
-description: Designing and optimizing DevSecOps CI/CD pipelines with security gates, SAST, DAST, and container scanning
+description: Design and optimize DevSecOps CI/CD pipelines with security gates, SAST, DAST, and container scanning
 ---
 
 # Pipeline Design Skill

@@ -34,6 +34,106 @@ paths:
           description: List of accounts
         '401':
           description: Authentication required
+        '403':
+          description: Insufficient permissions
+        '429':
+          description: Rate limited
+    post:
+      summary: Create a new account
+      operationId: createAccount
+      tags: [Accounts]
+      security:
+        - bearerAuth: [write:accounts]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Account created
+        '400':
+          description: Invalid request
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+        '429':
+          description: Rate limited
+  /accounts/{accountId}:
+    get:
+      summary: Get account by ID
+      operationId: getAccount
+      tags: [Accounts]
+      security:
+        - bearerAuth: [read:accounts]
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Account details
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Account not found
+        '429':
+          description: Rate limited
+    put:
+      summary: Update account details
+      operationId: updateAccount
+      tags: [Accounts]
+      security:
+        - bearerAuth: [write:accounts]
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+      responses:
+        '200':
+          description: Account updated
+        '400':
+          description: Invalid request
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Account not found
+        '429':
+          description: Rate limited
+    delete:
+      summary: Close an account (soft delete)
+      operationId: closeAccount
+      tags: [Accounts]
+      security:
+        - bearerAuth: [write:accounts]
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '204':
+          description: Account closed
+        '401':
+          description: Authentication required
+        '403':
+          description: Insufficient permissions
+        '404':
+          description: Account not found
         '429':
           description: Rate limited
 
@@ -43,3 +143,17 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  schemas:
+    CreateAccountRequest:
+      type: object
+      required: [accountType, currency]
+      properties:
+        accountType: { type: string, enum: [SAVINGS, CURRENT, FIXED_DEPOSIT] }
+        currency: { type: string, pattern: "^[A-Z]{3}$", default: SGD }
+        initialDeposit: { type: string, description: 'Monetary amount as string', default: '0.00' }
+
+    UpdateAccountRequest:
+      type: object
+      properties:
+        status: { type: string, enum: [ACTIVE, FROZEN] }

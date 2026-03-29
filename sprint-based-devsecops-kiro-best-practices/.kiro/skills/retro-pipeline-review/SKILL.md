@@ -1,6 +1,6 @@
 ---
 name: retro-pipeline-review
-description: Sprint Retrospective focused on DevSecOps pipeline optimization, security feedback loops, and scan performance
+description: Run Sprint Retrospective focused on DevSecOps pipeline optimization, security feedback loops, and scan performance
 ---
 
 # Retrospective Pipeline Review Skill

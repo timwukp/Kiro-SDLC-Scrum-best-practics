@@ -10,6 +10,7 @@ PROTECTED_PATHS=(
   "application-prod.yml"
   "deploy-prod.yml"
   ".github/workflows/deploy-prod"
+  "release-.*\\.yml"
 )
 
 # Read the tool input from stdin (Kiro passes tool arguments)

@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Performing security assessments, vulnerability scanning, and OWASP compliance checks for banking applications
+description: Perform security assessments, vulnerability scanning, and OWASP compliance checks for banking applications
 ---
 
 # Security Audit Skill

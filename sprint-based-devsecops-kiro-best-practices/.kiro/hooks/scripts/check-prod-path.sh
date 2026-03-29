@@ -8,6 +8,7 @@ PROTECTED_PATHS=(
   "application-prod.yml"
   "deploy-prod.yml"
   ".github/workflows/deploy-prod"
+  "release-.*\\.yml"
 )
 
 TOOL_INPUT=$(cat)

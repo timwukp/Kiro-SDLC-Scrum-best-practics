@@ -1,6 +1,6 @@
 ---
 name: sprint-planning
-description: Sprint planning, velocity tracking, risk identification, and resource allocation for banking projects
+description: Plan sprints, track velocity, identify risks, and allocate resources for banking projects
 ---
 
 # Sprint Planning Skill

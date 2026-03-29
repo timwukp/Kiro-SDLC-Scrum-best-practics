@@ -17,7 +17,7 @@ PATTERNS=(
 )
 
 for pattern in "${PATTERNS[@]}"; do
-  if echo "$TOOL_INPUT" | grep -qEi "$pattern"; then
+  if echo "$TOOL_INPUT" | grep -qEi -- "$pattern"; then
     echo "BLOCKED: Potential hardcoded credential detected."
     echo "Pattern matched: $pattern"
     echo "Use AWS Secrets Manager for all credentials."

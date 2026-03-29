@@ -24,3 +24,6 @@ node_modules/
 
 # Claude CLI
 .claude/
+
+# Test case data (local reference only, not for push)
+test-case/

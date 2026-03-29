@@ -1,6 +1,6 @@
 ---
 name: db-migration
-description: Creating and reviewing database migration scripts for banking databases using Flyway
+description: Write and review Flyway database migration scripts with rollback safety for banking schemas
 ---
 
 # Database Migration Skill

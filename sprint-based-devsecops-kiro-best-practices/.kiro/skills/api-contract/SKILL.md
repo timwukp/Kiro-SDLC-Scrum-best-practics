@@ -1,6 +1,6 @@
 ---
 name: api-contract
-description: Designing secure API contracts with OpenAPI specifications and security-first patterns
+description: Design secure API contracts with OpenAPI specifications and security-first patterns
 ---
 
 # API Contract Skill (Secure by Design)

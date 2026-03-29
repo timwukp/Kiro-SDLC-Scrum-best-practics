@@ -1,7 +1,7 @@
 ---
 inclusion: auto
-name: architecture-review
-description: Architecture decisions, system design, Zero Trust architecture, or threat modeling
+name: architecture-standards
+description: Architecture standards, decisions, system design, Zero Trust architecture, or threat modeling
 ---
 ## Banking Architecture Standards (Secure by Design)
 

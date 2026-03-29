@@ -1,6 +1,6 @@
 ---
 name: deployment-checklist
-description: Pre-deployment verification, release management, and production deployment procedures for banking systems
+description: Verify pre-deployment readiness, release management, and production deployment procedures for banking systems
 ---
 
 # Deployment Checklist Skill

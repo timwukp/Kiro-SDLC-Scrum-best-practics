@@ -46,6 +46,19 @@
         "get_page"
       ],
       "disabled": true
+    },
+    "snyk": {
+      "command": "npx",
+      "args": ["-y", "snyk-mcp-server@latest"],
+      "env": {
+        "SNYK_API_TOKEN": "${SNYK_API_TOKEN}"
+      },
+      "autoApprove": [
+        "test_project",
+        "list_vulnerabilities",
+        "get_vulnerability"
+      ],
+      "disabled": false
     }
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: ui-component-check
-description: Reviewing UI components for design system compliance, accessibility, and banking UX patterns
+description: Check React UI components against banking design system rules, accessibility standards, and Radix UI patterns
 ---
 
 # UI Component Check Skill

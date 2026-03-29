@@ -1,6 +1,6 @@
 ---
 name: security-story-writing
-description: Writing security user stories, acceptance criteria, and security-aware requirements for banking features
+description: Write security user stories, acceptance criteria, and security-aware requirements for banking features
 ---
 
 # Security Story Writing Skill
