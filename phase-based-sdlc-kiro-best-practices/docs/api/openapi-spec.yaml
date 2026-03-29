@@ -37,6 +37,142 @@ paths:
                 $ref: '#/components/schemas/AccountListResponse'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      summary: Create a new account
+      operationId: createAccount
+      tags: [Accounts]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+      responses:
+        '201':
+          description: Account created
+          headers:
+            X-Request-ID:
+              schema: { type: string, format: uuid }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: Account already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+
+  /accounts/{id}:
+    get:
+      summary: Get a single account by ID
+      operationId: getAccount
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/AccountIdParam'
+      responses:
+        '200':
+          description: Account details
+          headers:
+            X-Request-ID:
+              schema: { type: string, format: uuid }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    put:
+      summary: Update an existing account
+      operationId: updateAccount
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/AccountIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+      responses:
+        '200':
+          description: Account updated
+          headers:
+            X-Request-ID:
+              schema: { type: string, format: uuid }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    delete:
+      summary: Close an account (soft delete)
+      operationId: closeAccount
+      tags: [Accounts]
+      parameters:
+        - $ref: '#/components/parameters/AccountIdParam'
+      responses:
+        '204':
+          description: Account closed
+          headers:
+            X-Request-ID:
+              schema: { type: string, format: uuid }
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/RateLimited'
 
 components:
   securitySchemes:
@@ -54,6 +190,12 @@ components:
       name: size
       in: query
       schema: { type: integer, default: 20, minimum: 1, maximum: 100 }
+    AccountIdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique account identifier
+      schema: { type: string, format: uuid }
 
   schemas:
     AccountListResponse:
@@ -66,6 +208,14 @@ components:
           items: { $ref: '#/components/schemas/Account' }
         page: { $ref: '#/components/schemas/PageInfo' }
 
+    AccountResponse:
+      type: object
+      properties:
+        requestId: { type: string, format: uuid }
+        timestamp: { type: string, format: date-time }
+        data:
+          $ref: '#/components/schemas/Account'
+
     Account:
       type: object
       properties:
@@ -73,8 +223,24 @@ components:
         accountNumber: { type: string }
         accountType: { type: string, enum: [SAVINGS, CURRENT, FIXED_DEPOSIT] }
         currency: { type: string, pattern: '^[A-Z]{3}$' }
-        balance: { type: string, description: 'Monetary amount as string' }
+        balance: { type: string, description: 'Monetary amount as string (e.g. "1000.00")' }
         status: { type: string, enum: [ACTIVE, FROZEN, CLOSED] }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+
+    CreateAccountRequest:
+      type: object
+      required: [accountType, currency]
+      properties:
+        accountType: { type: string, enum: [SAVINGS, CURRENT, FIXED_DEPOSIT] }
+        currency: { type: string, pattern: '^[A-Z]{3}$', description: 'ISO 4217 currency code (e.g. SGD, USD)' }
+        initialDeposit: { type: string, description: 'Monetary amount as string (e.g. "500.00")' }
+
+    UpdateAccountRequest:
+      type: object
+      properties:
+        accountType: { type: string, enum: [SAVINGS, CURRENT, FIXED_DEPOSIT] }
+        status: { type: string, enum: [ACTIVE, FROZEN] }
 
     PageInfo:
       type: object
@@ -103,6 +269,19 @@ components:
   responses:
     Unauthorized:
       description: Authentication required
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+    RateLimited:
+      description: Rate limit exceeded (100 req/min customer, 1000 req/min internal)
+      headers:
+        Retry-After:
+          schema: { type: integer, description: 'Seconds until rate limit resets' }
       content:
         application/json:
           schema: { $ref: '#/components/schemas/ErrorResponse' }

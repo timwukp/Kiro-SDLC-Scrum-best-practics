@@ -31,6 +31,19 @@
       },
       "autoApprove": ["search_pages", "get_page"],
       "disabled": true
+    },
+    "snyk": {
+      "command": "npx",
+      "args": ["-y", "@snyk/mcp-server@latest"],
+      "env": {
+        "SNYK_TOKEN": "${SNYK_TOKEN}"
+      },
+      "autoApprove": [
+        "list_issues",
+        "get_issue",
+        "search_vulnerabilities"
+      ],
+      "disabled": false
     }
   }
 }
