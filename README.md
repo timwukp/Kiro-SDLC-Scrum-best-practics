@@ -120,7 +120,7 @@ Both configurations are built on the [Kiro Five-Element Architecture](https://ki
 
 | Element | Purpose | Key Principle |
 |---------|---------|--------------|
-| Steering | Context and standards | Instructs the AI (soft guidance, ~70% compliance) |
+| Steering | Context and standards | Instructs the AI (soft guidance) |
 | Hooks | Enforcement guardrails | Enforces rules (Pre Tool Use Shell = 100% deterministic) |
 | Skills | Reusable workflows | Progressive disclosure (loads on demand via `/skill-name`) |
 | Subagents | Specialized AI teammates | Isolated context, parallel execution, invoked explicitly or from skill flows |
