@@ -34,11 +34,11 @@
     },
     "snyk": {
       "command": "npx",
-      "args": ["-y", "snyk-mcp-server@latest"],
+      "args": ["-y", "@snyk/mcp-server@latest"],
       "env": {
-        "SNYK_API_TOKEN": "${SNYK_API_TOKEN}"
+        "SNYK_TOKEN": "${SNYK_TOKEN}"
       },
-      "autoApprove": ["test_project", "list_vulnerabilities", "get_vulnerability"],
+      "autoApprove": ["list_issues", "get_issue", "search_vulnerabilities"],
       "disabled": false
     }
   }
