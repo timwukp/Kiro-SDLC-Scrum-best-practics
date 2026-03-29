@@ -2,6 +2,8 @@
 
 English | [中文](kiro-workflow-diagram.zh-CN.md)
 
+> **Disclaimer:** This is an unofficial, community-maintained project. It is not affiliated with, endorsed by, or sponsored by AWS or the Kiro team. This workflow diagram is derived from testing, official documentation review, and configuration analysis — not from Kiro's official source code. It represents our best understanding of Kiro's behavior as of March 2026, but does not constitute an official specification. Actual behavior may differ across Kiro versions. This project is provided "as-is" without warranty of any kind. For authoritative information, refer to [kiro.dev/docs](https://kiro.dev/docs/).
+
 ```mermaid
 flowchart TD
 

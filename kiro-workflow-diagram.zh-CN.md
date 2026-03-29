@@ -2,6 +2,8 @@
 
 [English](kiro-workflow-diagram.md) | 中文
 
+> **免責聲明：** 本專案為非官方的社群維護專案，與 AWS 或 Kiro 團隊無關，未獲其認可或贊助。本工作流程圖是根據測試、官方文件審閱和配置分析推導而成，並非直接來自 Kiro 的官方的說明，也不代表官方的說明。它代表我們截至 2026 年 3 月對 Kiro 行為的最佳理解，但不構成官方規格。實際行為可能因 Kiro 版本而異。本專案按「現狀」提供，不附帶任何形式的保證。權威資訊請參閱 [kiro.dev/docs](https://kiro.dev/docs/)。
+
 ```mermaid
 flowchart TD
 
