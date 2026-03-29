@@ -1,6 +1,6 @@
 # Banking Sprint-Based DevSecOps — Kiro Five-Element Best Practices
 
-A complete [Kiro IDE](https://kiro.dev) configuration for banking teams running Scrum Sprints with security shift-left. Every Sprint, every commit — security is baked in from Day 1, not a final gate.
+A complete [Kiro IDE](https://kiro.dev) configuration for enterprise teams running Scrum Sprints with security shift-left. Every Sprint, every commit — security is baked in from Day 1, not a final gate.
 
 Kiro AI agents act as **Digital Teammates** embedded in the Scrum process — performing automated threat modeling, self-healing code vulnerabilities, chaos security testing, and autonomous canary rollback.
 
@@ -30,7 +30,7 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) and the [2
 
 ## Project Context
 
-- **Industry:** Banking / Financial Services (Singapore-licensed)
+- **Industry:** Enterprise / Financial Services (banking example, Singapore-licensed)
 - **Framework:** Scrum (2-week Sprints) + DevSecOps
 - **Tech Stack:** Java 21, Spring Boot 3.x, React 18 + TypeScript, Aurora PostgreSQL, AWS
 - **Compliance:** MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA

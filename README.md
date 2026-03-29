@@ -1,8 +1,8 @@
 # Kiro IDE Best Practices: Phase-Based SDLC vs Sprint-Based DevSecOps
 
-Ready-to-use [Kiro IDE](https://kiro.dev) configurations for banking software development teams. [Kiro](https://kiro.dev) is an AI-powered IDE that uses steering files, hooks, skills, subagents, and MCP integrations to embed project standards directly into your development workflow.
+Ready-to-use [Kiro IDE](https://kiro.dev) configurations for enterprise software development teams. [Kiro](https://kiro.dev) is an AI-powered IDE that uses steering files, hooks, skills, subagents, and MCP integrations to embed project standards directly into your development workflow.
 
-Two approaches to the same banking project — pick the one that matches how your team works:
+Two approaches to the same enterprise project — pick the one that matches how your team works:
 
 | | Phase-Based SDLC | Sprint-Based DevSecOps |
 |---|---|---|
@@ -49,7 +49,7 @@ DevSecOps + Scrum approach with Agentic AI as Digital Teammate.
 
 ## What They Share (Same Banking Context)
 
-Both configurations use the same banking domain:
+Both configurations use the same enterprise application context (banking example):
 - Java 21, Spring Boot 3.x, React 18 + TypeScript, Aurora PostgreSQL, AWS
 - MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA compliance
 - Production path protection (CAB approval required)

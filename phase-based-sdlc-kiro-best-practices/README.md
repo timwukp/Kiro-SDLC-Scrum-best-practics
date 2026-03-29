@@ -1,6 +1,6 @@
 # Banking Phase-Based SDLC — Kiro Five-Element Best Practices
 
-A complete, ready-to-use [Kiro IDE](https://kiro.dev) configuration for banking teams organized by development phases and specialized roles. Covers 14 roles across 5 linear phases (Planning → Design → Development → Testing → Deployment) with role-specific Steering, Subagents, Skills, Hooks, and MCP/Powers.
+A complete, ready-to-use [Kiro IDE](https://kiro.dev) configuration for enterprise teams organized by development phases and specialized roles. Covers 14 roles across 5 linear phases (Planning → Design → Development → Testing → Deployment) with role-specific Steering, Subagents, Skills, Hooks, and MCP/Powers.
 
 This is the **phase-based** approach. If your team runs Scrum Sprints with DevSecOps, see [sprint-based-devsecops-kiro-best-practices/](../sprint-based-devsecops-kiro-best-practices/) instead.
 
@@ -8,7 +8,7 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) — verifi
 
 ## Project Context
 
-- **Industry:** Banking / Financial Services (Singapore-licensed)
+- **Industry:** Enterprise / Financial Services (banking example, Singapore-licensed)
 - **Approach:** Phase-based SDLC — work flows linearly through specialized teams
 - **Tech Stack:** Java 21, Spring Boot 3.x, React 18 + TypeScript, Aurora PostgreSQL, AWS
 - **Compliance:** MAS TRM 2023, PCI-DSS v4.0, SOX, PDPA
@@ -29,21 +29,21 @@ Based on the [Kiro Five-Element Architecture](https://kiro.dev/docs/) — verifi
 # Clone this repo
 git clone https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics.git
 
-# Copy the .kiro folder into your banking project workspace
-cp -r phase-based-sdlc-kiro-best-practices/.kiro /path/to/your-banking-project/
+# Copy the .kiro folder into your project workspace
+cp -r phase-based-sdlc-kiro-best-practices/.kiro /path/to/your-project/
 
 # Copy AGENTS.md to your project root
-cp phase-based-sdlc-kiro-best-practices/AGENTS.md /path/to/your-banking-project/
+cp phase-based-sdlc-kiro-best-practices/AGENTS.md /path/to/your-project/
 
 # Copy reference docs (optional but recommended)
-cp -r phase-based-sdlc-kiro-best-practices/docs /path/to/your-banking-project/
-cp -r phase-based-sdlc-kiro-best-practices/config /path/to/your-banking-project/
+cp -r phase-based-sdlc-kiro-best-practices/docs /path/to/your-project/
+cp -r phase-based-sdlc-kiro-best-practices/config /path/to/your-project/
 ```
 
 ### Step 2: Make hook scripts executable
 
 ```bash
-cd /path/to/your-banking-project
+cd /path/to/your-project
 chmod +x .kiro/hooks/scripts/*.sh
 ```
 
@@ -71,7 +71,7 @@ Open Kiro IDE → Powers panel → Install these official Powers:
 
 ### Step 5: Open your project in Kiro
 
-Open your banking project folder in Kiro IDE. The steering files load automatically based on their inclusion modes. You're ready to go.
+Open your project folder in Kiro IDE. The steering files load automatically based on their inclusion modes. You're ready to go.
 
 ### Option B: Explore standalone (no existing project needed)
 
@@ -136,7 +136,7 @@ config/                ← Protected paths configuration
 
 #### UX Designer
 - **Steering loaded:** `frontend-standards.md` (fileMatch — activates when working on .tsx/.jsx files)
-- **Skill:** Type `/ux-review` for banking UX principles and WCAG 2.1 AA checklist
+- **Skill:** Type `/ux-review` for UX principles and WCAG 2.1 AA checklist
 - **Power:** Install **Figma** Power to pull design specs directly into Kiro
 - **Example prompt:** "Review the transfer flow wireframes against our banking UX standards and accessibility requirements"
 
