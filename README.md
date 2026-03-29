@@ -1,42 +1,25 @@
 # Kiro IDE Best Practices: Phase-Based SDLC vs Sprint-Based DevSecOps
 
-Ready-to-use [Kiro IDE](https://kiro.dev) configurations for banking software development teams. Two approaches to the same banking project — one organized by development phases and roles, the other by Scrum Sprints with security shift-left and Agentic AI.
+Ready-to-use [Kiro IDE](https://kiro.dev) configurations for banking software development teams. [Kiro](https://kiro.dev) is an AI-powered IDE that uses steering files, hooks, skills, subagents, and MCP integrations to embed project standards directly into your development workflow.
 
-## Which One Should I Use?
+Two approaches to the same banking project — pick the one that matches how your team works:
 
-```
-Do you work in fixed phases (Plan → Design → Build → Test → Deploy)?
-  → Use phase-based-sdlc-kiro-best-practices/
+| | Phase-Based SDLC | Sprint-Based DevSecOps |
+|---|---|---|
+| **Best for** | Teams with linear phases and specialized roles | Scrum teams with cross-functional developers |
+| **Work flow** | Requirements → Design → Development → Testing → Deployment | 2-week Sprints: Plan → Code → Scan → Test → Release → Monitor |
+| **Security** | Testing phase (near the end) | Every Sprint, every commit (shift-left) |
+| **Who owns security** | Security Engineer team | Everyone — every developer is a "Security Developer" |
+| **AI approach** | AI assists each role separately | AI as "Digital Teammate" — self-healing code, autonomous rollback |
+| **Release cadence** | After all phases complete | At least once per Sprint |
+| **Folder** | [`phase-based-sdlc-kiro-best-practices/`](./phase-based-sdlc-kiro-best-practices/) | [`sprint-based-devsecops-kiro-best-practices/`](./sprint-based-devsecops-kiro-best-practices/) |
 
-Do you work in 2-week Sprints with a Scrum Master and Product Owner?
-  → Use sprint-based-devsecops-kiro-best-practices/
-```
+## Prerequisites
 
-| Question | SDLC | Scrum + DevSecOps |
-|----------|------|-------------------|
-| How does work flow? | Linear phases: Requirements → Design → Development → Testing → Deployment | 2-week Sprints: Plan → Code → Scan → Test → Release → Monitor → Feedback (repeat) |
-| When does security happen? | Testing phase (near the end) | Every Sprint, every commit (shift-left from Day 1) |
-| Who owns security? | Security Engineer team | Everyone — every developer is a "Security Developer" |
-| How are teams organized? | By phase: BA team, Dev team, QA team, Ops team | One cross-functional Scrum Team (PO + SM + Developers) |
-| How does AI help? | AI assists each role separately | AI acts as "Digital Teammate" — self-healing code, autonomous rollback |
-| When do you release? | After all phases complete | At least once per Sprint (Sprint Review is not a gate) |
-| How do you improve? | Post-project lessons learned | Every Sprint Retrospective (continuous improvement) |
-
-## Quick Decision Guide
-
-Choose **phase-based-sdlc-kiro-best-practices** if:
-- Your team follows a traditional waterfall or phase-gate process
-- You have separate teams for development, testing, and operations
-- Security review happens before release, not during development
-- You're new to Agile and want a familiar structure with Kiro
-- Your organization requires formal phase sign-offs
-
-Choose **sprint-based-devsecops-kiro-best-practices** if:
-- Your team runs Scrum Sprints (1-4 weeks)
-- You have a Product Owner and Scrum Master
-- You want security baked into every Sprint (DevSecOps)
-- You want AI agents that proactively find and fix vulnerabilities
-- Your team is cross-functional (devs do testing, ops, and security)
+- [Kiro IDE](https://kiro.dev) installed
+- Git
+- Node.js 18+ (for `npx` — used by MCP servers)
+- A project to apply the configuration to (or try standalone — see Setup below)
 
 ## What's Inside Each
 
@@ -74,21 +57,23 @@ Both configurations use the same banking domain:
 - Database mutation guard (Flyway migrations only)
 - BigDecimal for money, audit logging, input validation
 
-## Getting Started with Kiro IDE
+## Kiro Five-Element Architecture
 
-If you're new to Kiro, here's what these configurations give you:
+Both configurations are built on the [Kiro Five-Element Architecture](https://kiro.dev/docs/):
 
-1. **Steering** (`.kiro/steering/`) — Context files that tell Kiro about your project standards. They load automatically based on what you're working on.
+| Element | What It Does | Key Principle |
+|---------|-------------|--------------|
+| **Steering** (`.kiro/steering/`) | Context files that tell Kiro about your project standards. Load automatically based on what you're working on. | Soft guidance — instructs the AI |
+| **Hooks** (`.kiro/hooks/`) | Automated guardrails. Pre Tool Use hooks can block operations (e.g., credential writes). | Hard enforcement — Shell Command hooks are 100% deterministic, zero cost |
+| **Skills** (`.kiro/skills/`) | Reusable workflows. Type `/threat-modeling` in chat to get the STRIDE template. | Progressive disclosure — loads on demand |
+| **Subagents** (`.kiro/agents/`) | Specialized AI teammates with isolated context and tools. Invoke explicitly or from within skill flows. | Isolated context, parallel execution |
+| **MCP/Powers** (`.kiro/settings/mcp.json`) | External tool integrations (GitHub, Jira, Snyk, Datadog). | Extends Kiro with external capabilities |
 
-2. **Subagents** (`.kiro/agents/`) — Specialized AI teammates with isolated context and tools. Invoke explicitly via slash command or from within a skill's execution flow.
+Core rule: **Steering instructs; Hooks enforce.** If a guardrail must be 100% enforced, it must be a Pre Tool Use Shell Command hook.
 
-3. **Skills** (`.kiro/skills/`) — Reusable workflows. Type `/threat-modeling` in chat to get the STRIDE threat model template.
+## Setup
 
-4. **Hooks** (`.kiro/hooks/`) — Automated guardrails. A Pre Tool Use hook can block Kiro from writing credentials into your code — 100% deterministic, zero cost.
-
-5. **MCP** (`.kiro/settings/mcp.json`) — External tool integrations (GitHub, Jira). Install Kiro Powers (Snyk, Datadog, Aurora DSQL) from the Powers panel.
-
-## Setup (Either Approach)
+### Option A: Apply to your existing project
 
 ```bash
 # 1. Clone this repo
@@ -114,19 +99,50 @@ chmod +x /path/to/your-project/.kiro/hooks/scripts/*.sh
 # 6. Open your project in Kiro IDE — steering loads automatically
 ```
 
-## Kiro Five-Element Architecture
+### Option B: Explore standalone (no existing project needed)
 
-Both configurations are built on the [Kiro Five-Element Architecture](https://kiro.dev/docs/):
+```bash
+# Clone and open directly in Kiro to explore the configuration
+git clone https://github.com/timwukp/Kiro-SDLC-Scrum-best-practics.git
+cd Kiro-SDLC-Scrum-best-practics/sprint-based-devsecops-kiro-best-practices
+chmod +x .kiro/hooks/scripts/*.sh
 
-| Element | Purpose | Key Principle |
-|---------|---------|--------------|
-| Steering | Context and standards | Instructs the AI (soft guidance) |
-| Hooks | Enforcement guardrails | Enforces rules (Pre Tool Use Shell = 100% deterministic) |
-| Skills | Reusable workflows | Progressive disclosure (loads on demand via `/skill-name`) |
-| Subagents | Specialized AI teammates | Isolated context, parallel execution, invoked explicitly or from skill flows |
-| MCP/Powers | External tool integration | GitHub, Jira, Snyk, Datadog, Aurora DSQL, Figma |
+# Open this folder in Kiro IDE
+# Try: "/threat-modeling" or "/security-audit" in chat
+```
 
-Core rule: **Steering instructs; Hooks enforce.** If a guardrail must be 100% enforced, it must be a Pre Tool Use Shell Command hook.
+## Abbreviations
+
+| Term | Meaning |
+|------|---------|
+| PO | Product Owner (Scrum accountability) |
+| SM | Scrum Master (Scrum accountability) |
+| BA | Business Analyst |
+| QA | Quality Assurance |
+| SRE | Site Reliability Engineer |
+| DBA | Database Administrator |
+| CISO | Chief Information Security Officer |
+| CAB | Change Advisory Board |
+| SDLC | Software Development Life Cycle |
+| ADR | Architecture Decision Record |
+| IaC | Infrastructure as Code |
+| CDK | AWS Cloud Development Kit |
+| MCP | Model Context Protocol |
+| SAST | Static Application Security Testing |
+| DAST | Dynamic Application Security Testing |
+| STRIDE | Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege |
+| OWASP | Open Worldwide Application Security Project |
+| CVE | Common Vulnerabilities and Exposures |
+| MFA | Multi-Factor Authentication |
+| JWT | JSON Web Token |
+| DR | Disaster Recovery |
+| RTO / RPO | Recovery Time Objective / Recovery Point Objective |
+| SLO / SLI | Service Level Objective / Service Level Indicator |
+| DORA | DevOps Research and Assessment (metrics) |
+| MAS TRM | Monetary Authority of Singapore — Technology Risk Management |
+| PCI-DSS | Payment Card Industry Data Security Standard |
+| PDPA | Personal Data Protection Act (Singapore) |
+| SOX | Sarbanes-Oxley Act |
 
 ## Tested & Validated
 
